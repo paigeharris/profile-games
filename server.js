@@ -19,13 +19,14 @@ db.on('disconnected', () => console.log('Mongo disconnected'));
 mongoose.Promise = global.Promise;
 
 // controllers
-// names?
+const usersController = require('./controllers/users');
 
 // middleware ----------------------------------------
 
 // enable req.body
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+
 
 // enable static assests
 app.use(express.static('public'));
@@ -39,7 +40,7 @@ app.use(session({
 }));
 
 // enable controllers
-// names?
+app.use('/users', usersController);
 
 // ------------------------------------------------------
 
