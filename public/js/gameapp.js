@@ -3,7 +3,10 @@ var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create
 var platforms;
 var score = 0;
 var scoreText;
-
+var Game = {};
+function init() {
+    game.stage.disableVisibilityChange = true;
+};
 function preload() {
   game.load.image('sky', 'assets/sky.png');
   game.load.image('ground', 'assets/platform.png');
