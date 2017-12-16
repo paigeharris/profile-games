@@ -20,6 +20,7 @@ mongoose.Promise = global.Promise;
 
 // controllers
 const usersController = require('./controllers/users');
+const sessionsController = require('./controllers/sessions');
 
 // middleware ----------------------------------------
 
@@ -41,6 +42,8 @@ app.use(session({
 
 // enable controllers
 app.use('/users', usersController);
+app.use('/sessions', sessionsController);
+
 
 // ------------------------------------------------------
 
