@@ -5,7 +5,7 @@ const server          = http.createServer(app);
 const moment          = require ( 'moment' );
 const mongoose        = require ( 'mongoose' );
 const morgan          = require ( 'morgan' );
-const session 	      = require ('session');
+const session 	      = require ('express-session');
 const io              = require('socket.io').listen(server);
 
 const db              = mongoose.connection;
