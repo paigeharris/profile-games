@@ -1,16 +1,18 @@
+const http            = require('http');
 const express         = require ( 'express' );
 const app             = express();
+const server          = http.createServer(app);
 const moment          = require ( 'moment' );
 const mongoose        = require ( 'mongoose' );
 const morgan          = require ( 'morgan' );
 const session 	      = require ('session');
-const io	            = require ('socket.io')(app);
+const io              = require('socket.io').listen(server);
 
 const db              = mongoose.connection;
 require( 'pretty-error' ).start();
 
-const mongoURI        = process.env.MONGODB_URI || 'mongodb://localhost/profile-games';
-const PORT            = process.env.PORT || 3004;
+const mongoURI        = process.env.MONGODB_URI || 'mongodb://localhost/games';
+const PORT            = process.env.PORT || 3000;
 
 //Set mongoose Promise Library
 mongoose.Promise      = global.Promise;
@@ -35,13 +37,12 @@ app.use ( morgan ( 'tiny' ) );
 
 app.use( express.static( 'public' ));
 
-
 //Routes
-const gamesController = require( './controllers/holidayController.js' );
+const gamesController = require( './controllers/games.js' );
 app.use ( '/games' , gamesController );
 
 app.listen( PORT , () =>{
   console.log( "Listening on PORT: " , PORT);
 });
 
-io.listen(port);
+io.listen(server);
