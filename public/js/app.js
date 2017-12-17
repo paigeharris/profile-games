@@ -2,6 +2,7 @@ const app = angular.module("Profile-GamesApp",[]);
 
 app.controller("MainController",["$http",function ($http) {
   //begin MainController
+
   this.showgame=true;
   this.toggleGame = () => {
     if (this.showgame) {
@@ -45,5 +46,15 @@ app.controller("MainController",["$http",function ($http) {
     });
   };
 
+
+  this.hello="Hello World";
+
   //end MainController
+
+//show all users
+
+
+
+
+
 }]);
