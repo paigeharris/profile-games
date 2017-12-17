@@ -1,0 +1,19 @@
+<small>Log In</small>
+  <form ng-submit='ctrl.loginUser()'>
+  <input type="text" placeholder="username" ng-model="ctrl.loginForm.username" />
+  <input type="password" placeholder="password" ng-model="ctrl.loginForm.password" />
+  <input type="submit"/>
+</form>
+
+<p>{{ctrl.error}}</p>
+
+<small>Register</small>
+  <form ng-submit='ctrl.registerUser()'>
+    <input type="text" placeholder="username" ng-model="ctrl.newUserForm.username" />
+    <input type="password" placeholder="password" ng-model="ctrl.newUserForm.password" />
+    <input type="submit" />
+</form>
+
+<form ng-if='ctrl.user' ng-submit='ctrl.logout()'>
+  <input type="submit" value="logout" />
+</form>

@@ -12,9 +12,14 @@ app.controller("MainController",["$http",function ($http) {
     }}
   //end MainController
 
-//show all users
-this.getUsers= () =>
+//navbar
+ this.openNav() {
+   document.getElementById('mySidenav').style.width= "250px";
+ }
 
+ this.closeNav(){
+   document.getElementById("mySidenav").style.width="0";
+ }
 
 
 
