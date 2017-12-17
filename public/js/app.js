@@ -4,4 +4,11 @@ app.controller("MainController",["$http",function ($http) {
   //begin MainController
   this.hello="Hello World";
   //end MainController
+
+//show all users
+this.getUsers= () =>
+
+
+
+
 }]);
