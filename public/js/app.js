@@ -6,7 +6,7 @@ app.controller("MainController",["$http",function ($http) {
   //end MainController
 
 //show all users
-this.getUsers= () =>
+
 
 
 
