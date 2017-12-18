@@ -10,6 +10,7 @@ $(() => {
  })
  $game.append($gamebutton);
  $gamebutton.on("click",() => {
+   socket.emit('myClick', {id: event.target});
    $gamebutton.hide();
    let buttonsize = ((Math.random()*100) + 50).toFixed();
    let color = '#'+ Math.round(0xffffff * Math.random()).toString(16);
