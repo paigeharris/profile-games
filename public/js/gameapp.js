@@ -18,12 +18,12 @@ $(() => {
  $gamebutton.on("click",() => {
 
    let color = '#'+ Math.round(0xffffff * Math.random()).toString(16);
-   let posx = (Math.random() * ($("#game").width())+$game.position().left-($gamebutton.width()/2));
-   let posy = (Math.random() * ($('#game').height())+$game.position().top-$gamebutton.height());
+   let posx = (Math.random() * ($("#game").width())-($gamebutton.width()));
+   let posy = (Math.random() * ($('#game').height())-$gamebutton.height());
    console.log("PosX: "+posx+"   PosY: "+posy);
    $gamebutton.css({
         'color' : "white",
-        'position':'absolute',
+        'position':'relative',
         'left':posx+'px',
         'top':posy+'px',
         'background-color': color
@@ -61,7 +61,7 @@ $(() => {
      console.log(data.scores);
      $gamebutton.css({
           'color' : "white",
-          'position':'absolute',
+          'position':'relative',
           'left':data.posx+'px',
           'top':data.posy+'px',
           'background-color': data.color
@@ -70,7 +70,7 @@ $(() => {
       $scoreboard.empty();
       $scoreboard.append($("<thead>"+"</thead>").append($("<td>"+"User"+"</td>"),$("<td>"+"Score"+"</td>")));
       for (let key in scores) {
-        $scoreboard.append($("<tr>").append($("<td>"+key+"</td>"),$("<td>"+scores[key]+"</td>")))
+        $scoreboard.append($("<tr>").append($("<td>"+key+"</td>"),$("<td>"+scores[key]+"</td>")));
       }
 
  })
