@@ -2,8 +2,8 @@ console.log($);
 $(() => {
   //onload
  const $gamebutton = $("<button>"+"Click Me To Score"+"</button>")
- const $body = $("body")
- $body.append($gamebutton);
+ const $game = $("#game")
+ $game.append($gamebutton);
  $gamebutton.on("click",() => {
    $gamebutton.hide();
  });
