@@ -108,10 +108,5 @@ app.controller("MainController", ["$http", function($http) {
 
   this.hello = "Hello World";
 
-  //end MainController
 
-
-
-
-
-}]);
+}]); //end MainController
