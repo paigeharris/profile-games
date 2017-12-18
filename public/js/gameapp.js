@@ -40,7 +40,6 @@ $(() => {
   $game.append($livechat);
   $game.append($chat);
   let scores = {}
-  scores[user]=0;
   $gamebutton.on("click",() => {
 
     let color = '#'+ Math.round(0xffffff * Math.random()).toString(16);
@@ -53,14 +52,12 @@ $(() => {
       'left':posx+'px',
       'top':posy+'px',
       'background-color': color
-    }).show().fadeIn(100).delay(1000);
+    }).fadeIn(100).delay(1000);
     $gamebutton.show();
-    if (scores[user]!=null) {  
+    if (scores[user]!=null) {
       scores[user]++;
     }
     else {
-      socket.emit("newUser", {
-      })
       scores[user]=1;
     }
 
