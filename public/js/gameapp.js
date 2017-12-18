@@ -10,7 +10,7 @@ $(() => {
    overflow:"hidden"
  })
  $game.append($gamebutton);
- let scores = {myscores:0,theirscores:0}
+ let scores = {player1:0,player2:0}
  $gamebutton.on("click",() => {
 
    let color = '#'+ Math.round(0xffffff * Math.random()).toString(16);
@@ -25,7 +25,7 @@ $(() => {
         'background-color': color
     }).show().fadeIn(100).delay(1000);
     $gamebutton.show();
-    scores.myscores++;
+    scores.player1++;
     console.log(scores);
 
    socket.emit('myClick', {
@@ -41,7 +41,7 @@ $(() => {
  var socket = io();
    socket.connect();
    socket.on('myClick', function (data) {
-     data.scores.theirscores++;
+     data.scores.player2++;
      scores=data.scores;
      console.log(data.scores);
      $gamebutton.css({
