@@ -9,12 +9,15 @@
 		<script src="js/gameapp.js" charset="utf-8"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js" charset="utf-8"></script>
 	  <script src="/js/app.js" charset="utf-8"></script>
+		<link rel="stylesheet" href="/css/style.css">
 	</head>
 	<body ng-controller="MainController as ctrl">
-	  <h1>{{ctrl.hello}}</h1>
+
+		<div ng-include=" '/js/partials/nav.html' "></div>
 
 
-		<div id="game">
+		<button ng-click="ctrl.toggleGame()">Show Game</button>
+		<div ng-show="ctrl.showgame" id="game">
 
 		</div>
 	</body>
