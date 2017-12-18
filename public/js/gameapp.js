@@ -53,6 +53,8 @@ $(() => {
 
    });
  });
+
+ 
  console.log($);
  var socket = io();
    socket.connect();
