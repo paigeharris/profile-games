@@ -1,5 +1,6 @@
 const app = angular.module("Profile-GamesApp", []);
 
+
 app.controller("MainController", ["$http", function($http) {
   //begin MainController
   // ctrl variables
