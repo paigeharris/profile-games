@@ -16,14 +16,23 @@
 	  <script src="/js/app.js" charset="utf-8"></script>
 
 		<link rel="stylesheet" href="/css/style.css">
+		<link href="https://fonts.googleapis.com/css?family=Bungee" rel="stylesheet">
 
 	</head>
 
 	<body ng-controller="MainController as ctrl">
+
+		<h1>Profile Games</h1>
+		<div id="navicon-all">
+			<div class="navicon"></div>
+			<div class="navicon"></div>
+			<div class="navicon"></div>
+		</div>
+
 		<div ng-if='ctrl.user'>
 			<h3>Hi, {{ctrl.user.username}} !</h3>
-
 		</div>
+
 		<div ng-include=" '/js/partials/nav.html' "></div>
 		<div ng-if='ctrl.logreg' ng-include=" '/js/partials/auth.html' "></div>
 		<div ng-if='ctrl.profile' ng-include=" '/js/partials/profile.html' "></div>
