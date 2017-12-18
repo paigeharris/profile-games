@@ -5,13 +5,12 @@ let newuser =true;
 let user ="";
 $(() => {
   //onload
-
+  const $livechat = $("<form>")
+  const $chat = $("<div>")
   const $gamebutton = $("<button>"+"Click Me To Score"+"</button>")
   const $game = $("#game")
   const $scoreboard = $("<table>");
-  const $livechat = $("<form>")
-  const $chat = $("<div>")
-  const $startgame = $("<button>"+"Start Game"+"</button>").click((e) => {
+  const $startgame = $("<button>"+"Join Game"+"</button>").click((e) => {
     socket.emit("newUser",{});
     $(this).hide();
     $gamebutton.show();
@@ -36,19 +35,23 @@ $(() => {
   })
   $game.append($startgame)
   $game.append($gamebutton.hide());
-  $game.append($scoreboard);
   $game.append($livechat);
+  $game.append($scoreboard);
   $game.append($chat);
   let scores = {}
   $gamebutton.on("click",() => {
-
+    function getPosition(min, max) {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min)) + min;
+    }
     let color = '#'+ Math.round(0xffffff * Math.random()).toString(16);
-    let posx = (Math.random() * ($("#game").width()-$gamebutton.width()));
-    let posy = (Math.random() * ($('#game').height()-$gamebutton.height()));
+    let posx = getPosition($game.position().left,$("#game").width()-$gamebutton.width());
+    let posy = getPosition($game.position().top,$("#game").height()-$gamebutton.height());
     console.log("PosX: "+posx+"   PosY: "+posy);
     $gamebutton.css({
       'color' : "white",
-      'position':'relative',
+      'position':'absolute',
       'left':posx+'px',
       'top':posy+'px',
       'background-color': color
@@ -87,7 +90,7 @@ $(() => {
     console.log(data.scores);
     $gamebutton.css({
       'color' : "white",
-      'position':'relative',
+      'position':'absolute',
       'left':data.posx+'px',
       'top':data.posy+'px',
       'background-color': data.color
