@@ -1,8 +1,10 @@
-<div id="mySidenav" class="sidenav">
-  <a href="#">Log In/Register</a>
-  <a href="#">Profile</a>
-  <a href="#">About Us</a>
-  <a href="#">Contact Us</a>
-
-  <span ng-click="openNav()">open</span>
+<div class="behrgood">
+  <button ng-click="ctrl.openNav()" type="button" name="button">SIDE NAV</button>
+    <div ng-show="ctrl.shownav" id="mySidenav" class="sidenav">
+        <button ng-click="ctrl.closeNav()" type="button" name="button">X</button>
+        <a href="#">Log In/Register</a>
+        <a href="#">Profile</a>
+        <a href="#">About Us</a>
+        <a href="#">Contact Us</a>
+    </div>
 </div>

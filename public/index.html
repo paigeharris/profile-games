@@ -13,7 +13,8 @@
 	<body ng-controller="MainController as ctrl">
 	  <h1>{{ctrl.hello}}</h1>
 
-		<div ng-include=" 'partials/nav.html' "></div>
+		<div ng-include=" '/js/partials/nav.html' "></div>
+
 
 		<button ng-click="ctrl.toggleGame()">Show Game</button>
 		<div ng-show="ctrl.showgame" id="game">
