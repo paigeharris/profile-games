@@ -8,7 +8,8 @@ app.controller("MainController", ["$http", function($http) {
   this.shownav = false;
   this.logreg = false;
   // ctrl functions
-  //toggleGame
+
+  //---------------toggleGame-----------------------//
   this.toggleGame = () => {
     if (this.showgame) {
       this.showgame = false;
@@ -17,7 +18,7 @@ app.controller("MainController", ["$http", function($http) {
     }
   }
 
-//openNav
+//---------------------openNav-----------------------//
   this.openNav = () => {
     document.getElementById("mySidenav").style.width = "250px";
     this.shownav = true;
@@ -36,8 +37,6 @@ app.controller("MainController", ["$http", function($http) {
   this.closelogreg =() => {
     this.logreg=false;
   }
-  //end MainController
-
 
   // --------------------------------------------
   // Users/authorization
