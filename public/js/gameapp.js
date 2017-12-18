@@ -10,10 +10,9 @@ $(() => {
    overflow:"hidden"
  })
  $game.append($gamebutton);
+ let scores = {myscores:0,theirscores:0}
  $gamebutton.on("click",() => {
 
-   // $gamebutton.hide();
-   // let buttonsize = ((Math.random()*100) + 50).toFixed();
    let color = '#'+ Math.round(0xffffff * Math.random()).toString(16);
    let posx = (Math.random() * ($("#game").width())+$game.position().left-($gamebutton.width()/2));
    let posy = (Math.random() * ($('#game').height())+$game.position().top-$gamebutton.height());
@@ -26,11 +25,15 @@ $(() => {
         'background-color': color
     }).show().fadeIn(100).delay(1000);
     $gamebutton.show();
+    scores.myscores++;
+    console.log(scores);
 
    socket.emit('myClick', {
      color: color,
      posx:posx,
-     posy:posy
+     posy:posy,
+     scores:scores
+
 
    });
  });
@@ -38,8 +41,9 @@ $(() => {
  var socket = io();
    socket.connect();
    socket.on('myClick', function (data) {
-     // console.log(data);
-     // console.log(data.id);
+     data.scores.theirscores++;
+     scores=data.scores;
+     console.log(data.scores);
      $gamebutton.css({
           'color' : "white",
           'position':'absolute',
