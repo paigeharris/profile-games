@@ -8,13 +8,15 @@
 	  <script src="js/phaser.min.js" charset="utf-8"></script>
 		<script src="js/gameapp.js" charset="utf-8"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js" charset="utf-8"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://use.fontawesome.com/510b786253.js"></script>
 	  <script src="/js/app.js" charset="utf-8"></script>
 		<link rel="stylesheet" href="/css/style.css">
 	</head>
 	<body ng-controller="MainController as ctrl">
 
 		<div ng-include=" '/js/partials/nav.html' "></div>
-
+		<div ng-if='ctrl.logreg' ng-include=" '/js/partials/auth.html' "></div>
 
 		<button ng-click="ctrl.toggleGame()">Show Game</button>
 		<div ng-show="ctrl.showgame" id="game">
