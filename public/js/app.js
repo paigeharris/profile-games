@@ -7,6 +7,9 @@ app.controller("MainController", ["$http", function($http) {
   this.showgame = true;
   this.shownav = false;
   this.logreg = false;
+  this.profile = false;
+  this.about = false;
+  this.contact= false;
   // ctrl functions
 
   //---------------toggleGame-----------------------//
@@ -18,7 +21,7 @@ app.controller("MainController", ["$http", function($http) {
     }
   }
 
-//---------------------openNav-----------------------//
+  //---------------------openNav-----------------------//
   this.openNav = () => {
     document.getElementById("mySidenav").style.width = "250px";
     this.shownav = true;
@@ -29,13 +32,39 @@ app.controller("MainController", ["$http", function($http) {
     this.shownav = false;
   }
 
-  //show reg/log in modal
-  this.openlogreg =  () => {
-    this.logreg=true;
+  //------------show reg/log in modal---------------//
+  this.openlogreg = () => {
+    this.logreg = true;
   }
 
-  this.closelogreg =() => {
-    this.logreg=false;
+  this.closelogreg = () => {
+    this.logreg = false;
+  }
+  //------------ProfileModal---------------------//
+  this.openProfile = () => {
+    this.profile = true;
+  }
+
+  this.closeProfile = () => {
+    this.profile = false;
+  }
+
+  //----------------AboutUs Modal--------------------//
+  this.openAbout = () => {
+    this.about = true;
+  }
+
+  this.closeAbout = () => {
+    this.about = false;
+  }
+
+  //---------------ContactUs Modal------------------//
+  this.openContact = () => {
+    this.contact  = true;
+  }
+
+  this.closeContact = () => {
+    this.contact = false;
   }
 
   // --------------------------------------------

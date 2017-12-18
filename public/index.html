@@ -20,6 +20,9 @@
 		</div>
 		<div ng-include=" '/js/partials/nav.html' "></div>
 		<div ng-if='ctrl.logreg' ng-include=" '/js/partials/auth.html' "></div>
+		<div ng-if='ctrl.profile' ng-include=" '/js/partials/profile.html' "></div>
+		<div ng-if='ctrl.about' ng-include=" '/js/partials/AboutUs.html' "></div>
+		<div ng-if='ctrl.contact' ng-include=" '/js/partials/contact.html' "></div>
 
 		<button ng-click="ctrl.toggleGame()">Show Game</button>
 		<div ng-show="ctrl.showgame" id="game">
