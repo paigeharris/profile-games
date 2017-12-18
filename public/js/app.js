@@ -15,10 +15,12 @@ app.controller("MainController",["$http",function ($http) {
     }}
 
   this.openNav = () => {
+    document.getElementById("mySidenav").style.width = "250px";
     this.shownav=true;
   }
 
   this.closeNav = () => {
+      document.getElementById("mySidenav").style.width = "0";
     this.shownav=false;
   }
   //end MainController
