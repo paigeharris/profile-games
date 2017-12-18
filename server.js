@@ -1,12 +1,12 @@
 const http = require('http');
 const express = require('express');
 const app = express();
-const server = http.createServer(app);
+
 const moment = require('moment');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const session = require('express-session');
-const io = require('socket.io').listen(server);
+
 
 const db = mongoose.connection;
 require('pretty-error').start();
@@ -60,8 +60,20 @@ app.use('/users', usersController);
 app.use('/sessions', sessionsController);
 
 
-app.listen(PORT, () => {
-  console.log("Listening on PORT: ", PORT);
-});
+// app.listen(PORT, () => {
+//   console.log("Listening on PORT: ", PORT);
+// });
 
-io.listen(server);
+const server = app.listen(PORT);
+const io = require('socket.io').listen(server);
+
+// io.listen(server);
+
+
+io.sockets.on('connection', function (socket) {
+    socket.on('myClick', function (data) {
+        socket.broadcast.emit('myClick', data);
+        console.log("Clicked Game Button");
+        console.log(data);
+    });
+});
