@@ -1,33 +1,34 @@
 const app = angular.module("Profile-GamesApp",[]);
 
 app.controller("MainController",["$http",function ($http) {
-  //begin MainController
-  // ctrl variables
+
+  // testing
   this.hello="Hello World";
-  this.showgame=true;
-  this.shownav=false;
+
+  // ctrl variables
+  this.showgame = true;
+  this.shownav = false;
+
   // ctrl functions
   this.toggleGame = () => {
     if (this.showgame) {
-      this.showgame=false;
+      this.showgame = false;
     } else {
-      this.showgame=true;
-    }}
+      this.showgame = true;
+    }};
 
+  // navbar
   this.openNav = () => {
     document.getElementById("mySidenav").style.width = "250px";
-    this.shownav=true;
-  }
+    this.shownav = true;
+  };
 
   this.closeNav = () => {
       document.getElementById("mySidenav").style.width = "0";
-    this.shownav=false;
-  }
-  //end MainController
+    this.shownav = false;
+  };
 
-//navbar
-  // --------------------------------------------
-  // Users/authorization
+  // users/authorization
   this.user = {};
   this.error = null;
 
@@ -62,9 +63,6 @@ app.controller("MainController",["$http",function ($http) {
   };
 
 
-  this.hello="Hello World";
 
-  //end MainController
 
-//show all users
-}]);
+}]); //end MainController
