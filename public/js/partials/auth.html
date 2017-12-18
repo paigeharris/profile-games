@@ -1,26 +1,27 @@
 <div id="logreg" >
   <div class="modal-textbox">
 
+  <h3 class="close" ng-click="ctrl.closelogreg()">x</h3>
 
-  <small>Log In</small>
+  <pl>Log In</p>
   <form ng-submit='ctrl.loginUser()'>
     <input type="text" placeholder="username" ng-model="ctrl.loginForm.username" />
     <input type="password" placeholder="password" ng-model="ctrl.loginForm.password" />
-    <input type="submit" />
+    <input class="button" type="submit" value="Log In"/>
   </form>
 
   <p>{{ctrl.error}}</p>
 
-  <small>Register</small>
+  <p>Register</p>
   <form ng-submit='ctrl.registerUser()'>
     <input type="text" placeholder="username" ng-model="ctrl.newUserForm.username" />
     <input type="password" placeholder="password" ng-model="ctrl.newUserForm.password" />
-    <input type="submit" />
+    <input class="button" type="submit" value="Register" />
   </form>
 
   <form ng-if='ctrl.user' ng-submit='ctrl.logout()'>
-    <input type="submit" value="logout" />
+    <input class="button" type="submit" value="Logout" />
   </form>
-  <h3 ng-click="ctrl.closelogreg()">x</h3>
+
 </div>
 </div>
