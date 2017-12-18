@@ -1,24 +1,29 @@
 <!DOCTYPE html>
 <html ng-app="Profile-GamesApp">
 	<head>
-		<meta charset="utf-8">
-		<title>Index</title>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
 
+		<meta charset="utf-8">
+
+		<title>Index</title>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
 	  <script src="js/phaser.min.js" charset="utf-8"></script>
 		<script src="js/gameapp.js" charset="utf-8"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js" charset="utf-8"></script>
 	  <script src="/js/app.js" charset="utf-8"></script>
+
 		<link rel="stylesheet" href="/css/style.css">
+
 	</head>
+
 	<body ng-controller="MainController as ctrl">
 
 		<div ng-include=" '/js/partials/nav.html' "></div>
-
 
 		<button ng-click="ctrl.toggleGame()">Show Game</button>
 		<div ng-show="ctrl.showgame" id="game">
 
 		</div>
 	</body>
+
 </html>
