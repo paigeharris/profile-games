@@ -6,15 +6,16 @@ $(() => {
  $game.css({
    width:'800px',
    height:'600px',
-   "background-color":"gray"
+   "background-color":"gray",
+   overflow:"hidden"
  })
  $game.append($gamebutton);
  $gamebutton.on("click",() => {
    $gamebutton.hide();
    let buttonsize = ((Math.random()*100) + 50).toFixed();
    let color = '#'+ Math.round(0xffffff * Math.random()).toString(16);
-   let posx = (Math.random() * ($("#game").width())+$game.position().left);
-   let posy = (Math.random() * ($('#game').height())+$game.position().top);
+   let posx = (Math.random() * ($("#game").width())+$game.position().left-($gamebutton.width()/2));
+   let posy = (Math.random() * ($('#game').height())+$game.position().top-$gamebutton.height());
    console.log("PosX: "+posx+"   PosY: "+posy);
    $gamebutton.css({
         'border-color': "rgb(216, 216, 216) rgb(209, 209, 209) rgb(186, 186, 186)",
