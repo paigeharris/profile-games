@@ -1,0 +1,88 @@
+body {
+	background-color: #bcefff;
+	color: #000000;
+}
+
+h1 {
+	font-family: 'Bungee', cursive;
+	color: #246eb9;
+	font-size: 45px;
+	text-align: center;
+	margin-left: auto;
+}
+
+.navicon {
+  width: 35px;
+  height: 5px;
+  background-color: black;
+  margin: 6px 0;
+}
+
+#navicon-all {
+	position: absolute;
+	top: 10px;
+	right: 15px;
+}
+
+/*modal*/
+#logreg, #profile, #about, #contact {
+	background-color: rgba(0,0,0,0.4);
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	z-index: 1;
+	/*This puts our modal in front of the body (which has a default z-index setting of `0`*/
+	overflow: auto;
+	/*If overflow is clipped, a scroll-bar should be added to see the rest of the content*/
+}
+
+.modal-textbox {
+	background-color: white;
+	height: 350px;
+	width: 550px;
+	border-radius: 2px;
+	margin: 150px auto;
+	box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+/*sidenav*/
+.sidenav{
+  height: 20%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 50px;
+  right: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 60px;
+  transition: 0.5s;
+}
+
+.sidenav a, .sidenav p {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover{
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn{
+  position:absolute;
+  top:0;
+  right: 25px;
+  font-size: 36px;
+  margin-;eft: 50px;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
