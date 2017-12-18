@@ -1,4 +1,3 @@
-// dependencies
 const http = require('http');
 const express = require('express');
 const app = express();
@@ -8,30 +7,41 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 const session = require('express-session');
 const io = require('socket.io').listen(server);
+
 const db = mongoose.connection;
 require('pretty-error').start();
 
 const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost/games';
 const PORT = process.env.PORT || 3000;
 
-// db
-mongoose.connect (mongoURI , { useMongoClient: true });
-db.on('open', () => {});
+//Set mongoose Promise Library
 mongoose.Promise = global.Promise;
 
+// Connect to Mongo
+mongoose.connect(mongoURI, {
+  useMongoClient: true
+});
+
+// Error / success
 db.on('error', (err) => console.log(err.message + ' is Mongod not running?'));
-db.on('connected', () => console.log('mongo connected:', mongoURI));
+db.on('connected', () => console.log('mongo connected: ', mongoURI));
 db.on('disconnected', () => console.log('mongo disconnected'));
 
-// enable morgan
+// Open the connection to mongo
+db.on('open', () => {});
+
+// Middleware
+app.use(express.urlencoded({
+  extended: false
+})); // extended: false - does not allow nested objects in query strings
+app.use(express.json()); // returns middleware that only parses JSON
+
+// Use morgan
 app.use(morgan('tiny'));
+
 app.use(express.static('public'));
 
-// enable req.body
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
-
-// routes
+//Routes
 const gamesController = require('./controllers/games.js');
 const usersController = require('./controllers/users');
 const sessionsController = require('./controllers/sessions');
@@ -45,13 +55,13 @@ app.use(session({
 }));
 
 // enable controllers
-app.use ( '/games' , gamesController );
+app.use('/games', gamesController);
 app.use('/users', usersController);
 app.use('/sessions', sessionsController);
 
-// listeners
-app.listen( PORT , () =>{
-  console.log( "Listening on PORT: " , PORT);
+
+app.listen(PORT, () => {
+  console.log("Listening on PORT: ", PORT);
 });
 
 io.listen(server);

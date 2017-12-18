@@ -1,10 +1,12 @@
 <div class="behrgood">
   <button ng-click="ctrl.openNav()" type="button" name="button">SIDE NAV</button>
-    <div ng-show="ctrl.shownav" id="mySidenav" class="sidenav">
-        <button ng-click="ctrl.closeNav()" type="button" name="button">X</button>
-        <a href="#">Log In/Register</a>
-        <a href="#">Profile</a>
-        <a href="#">About Us</a>
-        <a href="#">Contact Us</a>
-    </div>
+  <div ng-show="ctrl.shownav" id="mySidenav" class="sidenav">
+    <button ng-click="ctrl.closeNav()" type="button" name="button"><i class="fa fa-times-circle" aria-hidden="true"></i>
+</button>
+    <p ng-click='ctrl.openlogreg()' id="openlogreg">Log In/Register</p>
+
+    <p ng-click=''>Profile</p>
+    <p ng-click=''>About Us</p>
+    <p ng-click=''>Contact Us</p>
+  </div>
 </div>

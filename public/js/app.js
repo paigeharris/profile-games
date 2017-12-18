@@ -1,34 +1,45 @@
-const app = angular.module("Profile-GamesApp",[]);
+const app = angular.module("Profile-GamesApp", []);
 
-app.controller("MainController",["$http",function ($http) {
-
-  // testing
-  this.hello="Hello World";
-
+app.controller("MainController", ["$http", function($http) {
+  //begin MainController
   // ctrl variables
+  this.hello = "Hello World";
   this.showgame = true;
   this.shownav = false;
-
+  this.logreg = false;
   // ctrl functions
+
+  //---------------toggleGame-----------------------//
   this.toggleGame = () => {
     if (this.showgame) {
       this.showgame = false;
     } else {
       this.showgame = true;
-    }};
+    }
+  }
 
-  // navbar
+//---------------------openNav-----------------------//
   this.openNav = () => {
     document.getElementById("mySidenav").style.width = "250px";
     this.shownav = true;
-  };
+  }
 
   this.closeNav = () => {
-      document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("mySidenav").style.width = "0";
     this.shownav = false;
-  };
+  }
 
-  // users/authorization
+  //show reg/log in modal
+  this.openlogreg =  () => {
+    this.logreg=true;
+  }
+
+  this.closelogreg =() => {
+    this.logreg=false;
+  }
+
+  // --------------------------------------------
+  // Users/authorization
   this.user = {};
   this.error = null;
 
@@ -47,10 +58,13 @@ app.controller("MainController",["$http",function ($http) {
   };
 
   this.loginUser = () => {
-    $http({ url: '/sessions/login',
-    method: 'post',
-    data: this.loginForm })
+    $http({
+      url: '/sessions/login',
+      method: 'post',
+      data: this.loginForm
+    })
   };
+
 
   this.logoutUser = () => {
     $http({
@@ -63,6 +77,7 @@ app.controller("MainController",["$http",function ($http) {
   };
 
 
+  this.hello = "Hello World";
 
 
 }]); //end MainController
