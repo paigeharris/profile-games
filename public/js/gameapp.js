@@ -2,7 +2,8 @@ console.log($);
 var socket = io();
   socket.connect();
   socket.on('myClick', function (data) {
-    $(data.id).trigger('click');
+    console.log(data);
+    console.log(data.id);
 })
 $(() => {
   //onload

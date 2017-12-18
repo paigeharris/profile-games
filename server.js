@@ -73,6 +73,7 @@ const io = require('socket.io').listen(server);
 io.sockets.on('connection', function (socket) {
     socket.on('myClick', function (data) {
         socket.broadcast.emit('myClick', data);
-        console.log("fudge");
+        console.log("Clicked Game Button");
+        console.log(data);
     });
 });
