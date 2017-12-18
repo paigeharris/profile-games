@@ -4,8 +4,10 @@
   "description": "- Profile Games is a site with (multiplayer) games that are customized to your profile!  - The site will use your user information inside of some premade games...  - Such as using your profile picture on your avatar or using your profile name on leaderboards.",
   "main": "server.js",
   "dependencies": {
+    "bcrypt": "^1.0.3",
     "express": "^4.16.2",
-    "http": "0.0.0",
+    "express-session": "^1.15.6",
+    "http": "^0.0.0",
     "io": "^1.0.0",
     "moment": "^2.19.4",
     "mongoose": "^4.13.7",
