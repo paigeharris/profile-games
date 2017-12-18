@@ -18,8 +18,8 @@ $(() => {
  $gamebutton.on("click",() => {
 
    let color = '#'+ Math.round(0xffffff * Math.random()).toString(16);
-   let posx = (Math.random() * ($("#game").width())-($gamebutton.width()));
-   let posy = (Math.random() * ($('#game').height())-$gamebutton.height());
+   let posx = (Math.random() * ($("#game").width()-$gamebutton.width()));
+   let posy = (Math.random() * ($('#game').height()-$gamebutton.height()));
    console.log("PosX: "+posx+"   PosY: "+posy);
    $gamebutton.css({
         'color' : "white",
