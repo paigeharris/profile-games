@@ -88,7 +88,13 @@ app.controller("MainController", ["$http", function($http) {
 
   this.loginUser = () => {
     $http({
+
       url: '/sessions/login',
+      method: 'post',
+      data: this.loginForm
+    })
+    $http({
+      url: '/users',
       method: 'post',
       data: this.loginForm
     })
