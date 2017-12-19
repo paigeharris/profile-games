@@ -68,6 +68,7 @@ const server = app.listen(PORT);
 const io = require('socket.io').listen(server);
 
 // io.listen(server);
+
 app.get('/test', (req, res) => {
   res.send(req.session);
 })
@@ -77,5 +78,17 @@ io.sockets.on('connection', function (socket) {
         socket.broadcast.emit('myClick', data);
         console.log("Clicked Game Button");
         console.log(data);
+        game1data=data;
+    });
+    socket.on('newChat', function (data) {
+        socket.broadcast.emit('newChat', data);
+        console.log(data);
+        game1chat =data;
+    });
+
+    socket.on('newUser', function (data) {
+      user = Math.round(0xffffff * Math.random()).toString(16);
+        socket.emit('newUser', {user});
+        console.log(user);
     });
 });
