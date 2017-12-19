@@ -35,13 +35,15 @@
 		<div ng-if='ctrl.profile' ng-include=" '/js/partials/profile.html' "></div>
 		<div ng-if='ctrl.about' ng-include=" '/js/partials/AboutUs.html' "></div>
 		<div ng-if='ctrl.contact' ng-include=" '/js/partials/contact.html' "></div>
-
+		<form ng-if='ctrl.user.logged' ng-submit='ctrl.logoutUser()'>
+			<input class="button" type="submit" value="Logout" />
+		</form>
 		<button ng-click="ctrl.toggleGame()">Show Game</button>
-		<div ng-show="ctrl.showgame" id="game">
+		<div ng-controller="GameController as gctrl" ng-show="ctrl.showgame" >
+			<div id="game">
 
-			<form ng-if='ctrl.user.logged' ng-submit='ctrl.logoutUser()'>
-			  <input class="button" type="submit" value="Logout" />
-			</form>
+			</div>
+
 
 		</div>
 	</body>
