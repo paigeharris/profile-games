@@ -18,14 +18,17 @@
 
 
 
+  <p>Register</p>
+  <form ng-submit='ctrl.registerUser()'>
+    <input type="text" placeholder="username" ng-model="ctrl.newUserForm.username" />
+    <input type="password" placeholder="password" ng-model="ctrl.newUserForm.password" />
+    <input class="button" type="submit" value="Register" />
+  </form>
+
+
       <p>{{ctrl.error}}</p>
 
-      <small>Register</small>
-      <form ng-submit='ctrl.registerUser()'>
-        <input type="text" placeholder="username" ng-model="ctrl.newUserForm.username" required/>
-        <input type="password" placeholder="password" ng-model="ctrl.newUserForm.password" required/>
-        <input type="submit" class='button'/>
-      </form>
+      
 
       <form ng-if='ctrl.user.logged' ng-submit='ctrl.logout()'>
         <input type="submit" value="logout" value="Register"/>
