@@ -69,8 +69,10 @@ const io = require('socket.io').listen(server);
 
 // io.listen(server);
 
-let game1data ={};
-let game1chat ={};
+app.get('/test', (req, res) => {
+  res.send(req.session);
+})
+
 io.sockets.on('connection', function (socket) {
     socket.on('myClick', function (data) {
         socket.broadcast.emit('myClick', data);

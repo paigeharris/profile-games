@@ -78,21 +78,38 @@ app.controller("MainController", ["$http", function($http) {
       url: '/users',
       method: 'post',
       data: this.newUserForm
-    }).then(response => {
+    }).then((response) => {
       console.log('Successful registration');
+      // updateUser(response.data);
       this.user = response.data;
+      this.newUserForm = {};
+      this.error = null;
     }, ex => {
       console.log(ex.data.err);
-      this.error = ex.statusText;
-    }).catch(err => this.error = 'Is server working?');
+      // this.error = ex.statusText;
+      this.registerError = 'Incorrect username?';
+    }).catch(err => this.error = '');
   };
 
   this.loginUser = () => {
+    console.log("login user function is running");
     $http({
+
       url: '/sessions/login',
       method: 'post',
       data: this.loginForm
+    }).then((response) =>{
+      // updateUser(response.data);
+      this.user = response.data
+      this.user.logged=true;
+      console.log(this.user.username);
+      this.loginForm = {};
+      this.error = null;
+    }, ex => {
+      console.log('ex'. ex.data.err);
+      this.loginError = ex.statusText;
     })
+    .catch(err => this.loginError = 'Something went wrong');
   };
 
 
@@ -102,8 +119,12 @@ app.controller("MainController", ["$http", function($http) {
       method: 'delete'
     }).then((response) => {
       console.log(response.data);
+      user = {};
       this.user = null;
-    });
+    }, ex => {
+      this.loginError = ex.statusText;
+    })
+    .catch(err => this.loginError = 'Something went wrong');
   };
 
 
