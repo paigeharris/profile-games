@@ -84,6 +84,7 @@ app.controller("MainController", ["$http", function($http) {
       this.user = response.data;
       this.newUserForm = {};
       this.error = null;
+      this.user.logged=true;
     }, ex => {
       console.log(ex.data.err);
       // this.error = ex.statusText;
@@ -100,7 +101,7 @@ app.controller("MainController", ["$http", function($http) {
       data: this.loginForm
     }).then((response) =>{
       // updateUser(response.data);
-      this.user = response.data
+      this.user = response.data;
       this.user.logged=true;
       console.log(this.user.username);
       this.loginForm = {};
@@ -114,12 +115,15 @@ app.controller("MainController", ["$http", function($http) {
 
 
   this.logoutUser = () => {
+    console.log('log out button is clicked');
     $http({
       url: '/sessions/logout',
       method: 'delete'
     }).then((response) => {
       console.log(response.data);
+
       user = {};
+      this.user.logged = false;
       this.user = null;
     }, ex => {
       this.loginError = ex.statusText;

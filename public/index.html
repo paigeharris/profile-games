@@ -5,7 +5,7 @@
 		<meta charset="utf-8">
 
 		<title>Index</title>
-		
+
 		<script type="text/javascript" src="/socket.io/socket.io.js"></script>
 	  <script src="js/phaser.min.js" charset="utf-8"></script>
 		<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
@@ -24,7 +24,7 @@
 
 		<h1>Profile Games</h1>
 
-		<div ng-if='ctrl.user'>
+		<div ng-if='ctrl.user.logged'>
 			<h3>Hi, {{ctrl.user.username}} !</h3>
 		</div>
 
@@ -37,6 +37,9 @@
 		<button ng-click="ctrl.toggleGame()">Show Game</button>
 		<div ng-show="ctrl.showgame" id="game">
 
+			<form ng-if='ctrl.user.logged' ng-submit='ctrl.logoutUser()'>
+			  <input class="button" type="submit" value="Logout" />
+			</form>
 
 		</div>
 	</body>
