@@ -1,18 +1,21 @@
+let newuser =true;
+var socket = io();
+socket.connect();
+
 let user ="unchanged";
 let username ="unchanged";
-
+let allchats = [];
 const $gamebutton = $("<button>"+"Click Me To Score"+"</button>")
 let $startgame = $("<button data-ng-click='gctrl.getUser()'>"+"Join Game"+"</button>").click((e) => {
-  // socket.emit("newUser",{});
   $(this).hide();
   $gamebutton.show();
 })
+
 
 //gamecontroller
 app.controller("GameController", ["$http","$compile","$scope", function($http,$compile,$scope) {
   let temp = $compile($startgame)($scope);
   this.hello="heya";
-  this.usero = "boo";
   this.user = "";
   console.log("hey")
   this.getUser = () => {
@@ -25,11 +28,8 @@ app.controller("GameController", ["$http","$compile","$scope", function($http,$c
       this.user=response.data;
       user = response.data;
       username=response.data.username;
-      this.usero=response.data.username||"Blerk";
-      console.log(this.usero+"= usero");
         newuser=false;
 
-      console.log(this.user);
     }).catch((err) => {
       console.log(err);
     })
@@ -38,36 +38,34 @@ app.controller("GameController", ["$http","$compile","$scope", function($http,$c
 //end GameController
 
 
-let newuser =true;
-
-console.log(username);
-
-var socket = io();
-socket.connect();
 
 
 
 $(() => {
   //onload
-  const $livechat = $("<form>")
-  const $chat = $("<div>")
+
 
   const $game = $("#game")
   const $scoreboard = $("<table>");
 
-
-
-
+  const $livechat = $("<form onsubmit='return false'>")
+  const $chat = $("<div>")
   let $typed = $("<input type='text' placeholder='LiveChat Here'>")
   $livechat.append($typed);
   $livechat.append( $("<input type='submit' value='Go'>"));
   $livechat.submit(() => {
+    allchats.push($typed.val())
+    $chat.empty();
+    for (chat of allchats) {
+      $chat.append($("<h2>"+chat+"</h2>"))
+    }
 
-    $chat.append($("<h2>"+$typed.val()+"</h2>"))
     socket.emit('newChat', {
-      chat:$typed.val()
-    });
-    $typed.val("");
+      allchats:allchats
+    })
+      // $typed.val("");
+
+
   });
   $game.css({
     width:'800px',
@@ -81,6 +79,7 @@ $(() => {
   $game.append($scoreboard);
   $game.append($chat);
   let scores = {}
+
   $gamebutton.on("click",() => {
     function getPosition(min, max) {
       min = Math.ceil(min);
@@ -145,13 +144,18 @@ $(() => {
 
   });
   socket.on("newChat", function (data) {
-    $chat.append($("<h2>"+data.chat+"</h2>"))
+    console.log(data);
+    allchats=data.allchats;
+    $chat.empty();
+    for (chat of allchats) {
+      $chat.append($("<h2>"+chat+"</h2>"))
+    }
   });
 
   socket.on("newUser", function (data) {
     console.log(data);
     if (newuser) {
-      username = data.user;
+      user = data.user;
       newuser=false;
     }
 
