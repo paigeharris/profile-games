@@ -1,5 +1,8 @@
 console.log(app);
+app.controller("GameController", ["$http", function($http) {
 
+
+}]); //end GameController
 var socket = io();
 socket.connect();
 
