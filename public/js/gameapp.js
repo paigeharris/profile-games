@@ -1,3 +1,5 @@
+console.log(app);
+
 var socket = io();
 socket.connect();
 
