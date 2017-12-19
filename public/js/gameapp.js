@@ -4,7 +4,7 @@ socket.connect();
 
 let user ="unchanged";
 let username ="unchanged";
-let allchats = ["bing","bong"];
+let allchats = [];
 const $gamebutton = $("<button>"+"Click Me To Score"+"</button>")
 let $startgame = $("<button data-ng-click='gctrl.getUser()'>"+"Join Game"+"</button>").click((e) => {
   $(this).hide();
