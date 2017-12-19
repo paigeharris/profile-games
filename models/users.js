@@ -3,9 +3,10 @@ const bcrypt = require('bcrypt');
 
 const userSchema = mongoose.Schema({
   username: { type: String, unique: true ,required: true },
-  // avatar: { type: String, default: "https://i.imgur.com/fGi0Yl0.png" },
+  avatar: { type: String, default: "https://i.imgur.com/fGi0Yl0.png" },
   password: { type: String, required: true},
-  
+  aboutme: { type: String, default: "tell us about yourself" }
+
 });
 
 userSchema.pre('save', function(next) {

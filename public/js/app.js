@@ -11,6 +11,7 @@ app.controller("MainController", ["$http", function($http) {
   this.profile = false;
   this.about = false;
   this.contact= false;
+  this.useredit= false;
   // ctrl functions
 
   //---------------toggleGame-----------------------//
@@ -43,7 +44,12 @@ app.controller("MainController", ["$http", function($http) {
   }
   //------------ProfileModal---------------------//
   this.openProfile = () => {
+    if (this.user.logged){
+
     this.profile = true;
+  }else {
+    this.error=true;
+  }
   }
 
   this.closeProfile = () => {
@@ -91,6 +97,37 @@ app.controller("MainController", ["$http", function($http) {
       this.registerError = 'Incorrect username?';
     }).catch(err => this.error = '');
   };
+
+
+  this.editUser = () => {
+    $http({
+      url: '/users/' + this.user._id,
+      method: 'put',
+      data: this.user
+    }).then((response) => {
+      this.useredit=false;
+    },(ex) => {
+      console.log(ex.data.err);
+
+    }).catch((err) => {
+      console.log(err);
+    })
+  }
+
+  this.deleteUser = () => {
+    $http({
+      url: '/users/' + this.user._id,
+      method: 'DELETE'
+    }).then((response) => {
+      this.user=null;
+      this.useredit=false;
+      this.closeProfile();
+    },(ex) => {
+      console.log(ex.data.err);
+    }).catch((err) => {
+      console.log(err);
+    })
+  }
 
   this.loginUser = () => {
     console.log("login user function is running");

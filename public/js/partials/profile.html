@@ -1,7 +1,24 @@
-<div id="profile" >
+<div id="profile">
   <div class="modal-textbox">
 
-<h1>PROFILE</h1>
-  <h3 ng-click="ctrl.closeProfile()">x</h3>
-</div>
+    <h1>PROFILE</h1>
+    <h3 ng-click="ctrl.closeProfile()">x</h3>
+    {{ctrl.user.username}}
+    <img ng-src="{{ctrl.user.avatar}}" alt="">
+    {{ctrl.user.aboutme}}
+    <button ng-click="ctrl.useredit=true" type="button" placename="button">EDIT Profile</button>
+
+    <div ng-if="ctrl.useredit">
+      <form ng-submit="ctrl.editUser()">
+        <input ng-model="ctrl.user.username" type="text" name="" value="">
+        <input ng-model="ctrl.user.avatar" type="text" name="" value="">
+        <input ng-model="ctrl.user.aboutme" type="text" name="" value="">
+        <input type="hidden" ng-model="ctrl.user._id">
+        <button type="submit" name="button">Change Me</button>
+        <button ng-click="ctrl.deleteUser()" type="button" name="button">Delete Account</button>
+      </form>
+
+    </div>
+  </div>
+
 </div>

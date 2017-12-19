@@ -27,6 +27,9 @@
 		<div ng-if='ctrl.user.logged'>
 			<h3>Hi, {{ctrl.user.username}} !</h3>
 		</div>
+		<div ng-if='ctrl.error'>
+			<h3>Hey, Please log in to see profile</h3>
+		</div>
 
 		<div ng-include=" '/js/partials/nav.html' "></div>
 		<div ng-if='ctrl.logreg' ng-include=" '/js/partials/auth.html' "></div>
