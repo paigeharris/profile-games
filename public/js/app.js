@@ -78,10 +78,10 @@ app.controller("MainController", ["$http", function($http) {
       url: '/users',
       method: 'post',
       data: this.newUserForm
-    }).then(response => {
+    }).then((response) => {
       console.log('Successful registration');
-      updateUser(response.data);
-      this.user = user;
+      // updateUser(response.data);
+      this.user = response.data;
       this.newUserForm = {};
       this.error = null;
     }, ex => {
@@ -92,14 +92,17 @@ app.controller("MainController", ["$http", function($http) {
   };
 
   this.loginUser = () => {
+    console.log("login user function is running");
     $http({
 
       url: '/sessions/login',
       method: 'post',
       data: this.loginForm
-    }).then(response =>{
-      updateUser(response.data);
-      this.user = user
+    }).then((response) =>{
+      // updateUser(response.data);
+      this.user = response.data
+      this.user.logged=true;
+      console.log(this.user.username);
       this.loginForm = {};
       this.error = null;
     }, ex => {

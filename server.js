@@ -68,7 +68,9 @@ const server = app.listen(PORT);
 const io = require('socket.io').listen(server);
 
 // io.listen(server);
-
+app.get('/test', (req, res) => {
+  res.send(req.session);
+})
 
 io.sockets.on('connection', function (socket) {
     socket.on('myClick', function (data) {
