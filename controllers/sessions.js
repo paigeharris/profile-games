@@ -25,4 +25,15 @@ router.delete('/logout', (req, res) => {
   });
 });
 
+
+router.get('/', async (req, res) => {
+  try{
+    const user = await User.findOne({ username: req.session.user.username});
+      res.status(200).json(user);
+
+  } catch (err) {
+    res.status(400).json({ err: err.message });
+  }
+});
+
 module.exports = router;

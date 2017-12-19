@@ -1,25 +1,62 @@
-console.log(app);
-app.controller("GameController", ["$http", function($http) {
+let user ="unchanged";
+let username ="unchanged";
+
+const $gamebutton = $("<button>"+"Click Me To Score"+"</button>")
+let $startgame = $("<button data-ng-click='gctrl.getUser()'>"+"Join Game"+"</button>").click((e) => {
+  // socket.emit("newUser",{});
+  $(this).hide();
+  $gamebutton.show();
+})
+
+//gamecontroller
+app.controller("GameController", ["$http","$compile","$scope", function($http,$compile,$scope) {
+  let temp = $compile($startgame)($scope);
+  this.hello="heya";
+  this.usero = "boo";
+  this.user = "";
+  console.log("hey")
+  this.getUser = () => {
+    console.log("clicked");
+    $http({
+      url:"/sessions",
+      method:"get"
+    }).then((response) => {
+      console.log(response.data);
+      this.user=response.data;
+      user = response.data;
+      username=response.data.username;
+      this.usero=response.data.username||"Blerk";
+      console.log(this.usero+"= usero");
+        newuser=false;
+
+      console.log(this.user);
+    }).catch((err) => {
+      console.log(err);
+    })
+  }
+  }]);
+//end GameController
 
 
-}]); //end GameController
+let newuser =true;
+
+console.log(username);
+
 var socket = io();
 socket.connect();
 
-let newuser =true;
-let user ="";
+
+
 $(() => {
   //onload
   const $livechat = $("<form>")
   const $chat = $("<div>")
-  const $gamebutton = $("<button>"+"Click Me To Score"+"</button>")
+
   const $game = $("#game")
   const $scoreboard = $("<table>");
-  const $startgame = $("<button>"+"Join Game"+"</button>").click((e) => {
-    socket.emit("newUser",{});
-    $(this).hide();
-    $gamebutton.show();
-  })
+
+
+
 
   let $typed = $("<input type='text' placeholder='LiveChat Here'>")
   $livechat.append($typed);
@@ -62,15 +99,15 @@ $(() => {
       'background-color': color
     }).fadeIn(100).delay(1000);
     $gamebutton.show();
-    if (scores[user]!=null) {
-      scores[user]++;
+    if (scores[username]!=null) {
+      scores[username]++;
     }
     else {
-      scores[user]=1;
+      scores[username]=1;
     }
 
     console.log(scores);
-    console.log("My Score: "+scores[user]);
+    console.log("My Score: "+scores[username]);
     $scoreboard.empty();
     $scoreboard.append($("<thead>"+"</thead>").append($("<td>"+"User"+"</td>"),$("<td>"+"Score"+"</td>")));
     for (let key in scores) {
@@ -88,7 +125,6 @@ $(() => {
   });
 
 
-  console.log($);
 
   socket.on('myClick', function (data) {
     scores=data.scores;
@@ -115,13 +151,14 @@ $(() => {
   socket.on("newUser", function (data) {
     console.log(data);
     if (newuser) {
-      user = data.user;
+      username = data.user;
       newuser=false;
     }
 
 
 
   });
+
 
 
 
