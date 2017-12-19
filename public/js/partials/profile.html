@@ -1,11 +1,11 @@
 <div id="profile">
   <div class="modal-textbox">
 
-    <h1>PROFILE</h1>
-    <h3 ng-click="ctrl.closeProfile()">x</h3>
-    {{ctrl.user.username}}
-    <img ng-src="{{ctrl.user.avatar}}" alt="">
-    {{ctrl.user.aboutme}}
+    <h2>PROFILE</h2>
+    <h3 class="close" ng-click="ctrl.closeProfile()">x</h3>
+    <p>Name: {{ctrl.user.username}}</p>
+    <p><img class="profile-img" ng-src="{{ctrl.user.avatar}}" alt="profile picture"></p>
+    <p>About me: {{ctrl.user.aboutme}}</p>
     <button ng-click="ctrl.useredit=true" type="button" placename="button">EDIT Profile</button>
 
     <div ng-if="ctrl.useredit">
