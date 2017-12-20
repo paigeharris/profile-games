@@ -53,7 +53,7 @@ $(() => {
   const $scoreboard = $("<table>").addClass("scoreboard")
   $scoreboard.append($("<thead>"+"</thead>").addClass("scorehead").append($("<td>"+"User"+"</td>").addClass("scoretd"),$("<td>"+"Score"+"</td>").addClass("scoretd"),$("<td>"+"Avatar"+"</td>").addClass("scoretd")));
   const $livechat = $("<form onsubmit='return false'>").addClass("chatform");
-  const $chat = $("<div>").addClass("chatbox").append($("<h2>"+"Chat"+"</h2>").addClass("chath2"));
+  const $chat = $("<div>").addClass("chatbox").append($("<p>"+"Chat"+"</p>").addClass("chath2"));
   let $typed = $("<input type='text' placeholder='LiveChat Here'>").addClass("chatinput");
   $livechat.append($typed);
   $livechat.append( $("<input type='submit' value='Go'>").addClass("chatsubmit"));
