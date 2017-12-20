@@ -152,9 +152,9 @@ $(() => {
     }).fadeIn(100).delay(1000);
     // $gamebutton.show();
     $scoreboard.empty();
-    $scoreboard.append($("<thead>"+"</thead>").addClass("scorehead").append($("<td>"+"User"+"</td>").addClass("scoretd"),$("<td>"+"Score"+"</td>").addClass("scoretd")));
+    $scoreboard.append($("<thead>"+"</thead>").addClass("scorehead").append($("<td>"+"User"+"</td>").addClass("scoretd"),$("<td>"+"Score"+"</td>").addClass("scoretd"),$("<td>"+"Avatar"+"</td>").addClass("scoretd")));
     for (let key in scores) {
-      $scoreboard.append($("<tr>").addClass("scorerow").append($("<td>"+key+"</td>").addClass("scoretd"),$("<td>"+scores[key].score+"</td>").addClass("scoretd"),$("<td>"+scores[key].avatar+"</td>").addClass("scoretd")));
+      $scoreboard.append($("<tr>").addClass("scorerow").append($("<td>"+key+"</td>").addClass("scoretd"),$("<td>"+scores[key].score+"</td>").addClass("scoretd"),$("<td>").addClass("scoretd").append($("<img>").addClass("scoreimg").attr("src",scores[key].avatar))));
     }
 
   });
