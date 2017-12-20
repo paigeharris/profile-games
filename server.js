@@ -72,9 +72,11 @@ const io = require('socket.io').listen(server);
 app.get('/test', (req, res) => {
   res.send(req.session);
 })
-
+let game1data = {};
+let chat1 = [];
 io.sockets.on('connection', function (socket) {
     socket.on('myClick', function (data) {
+        game1data=data;
         socket.broadcast.emit('myClick', data);
         console.log("Clicked Game Button");
         console.log(data);
@@ -85,8 +87,9 @@ io.sockets.on('connection', function (socket) {
     });
 
     socket.on('newUser', function (data) {
-      user = Math.round(0xffffff * Math.random()).toString(16);
-        socket.emit('newUser', {user});
-        console.log(user);
+
+      socket.emit('newClick', game1data);
+        // socket.emit('newUser', {user});
+        // console.log(user);
     });
 });
