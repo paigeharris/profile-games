@@ -4,7 +4,7 @@ socket.connect();
 
 let user ="unchanged";
 let username ="unchanged";
-let allchats = [];
+let allchats = ["Chat"];
 const $gamebutton = $("<button>"+"Click Me To Score"+"</button>").addClass("scorebutton");
 let $startgame = $("<button data-ng-click='gctrl.getUser()'>"+"Join Game"+"</button>").addClass("joinbutton").click((e) => {
   socket.emit('newUser', {
@@ -50,10 +50,10 @@ $(() => {
 
   const $gamecontainer = $(".gamecontainer");
   const $game = $("#game")
-  const $scoreboard = $("<table>").addClass("scoreboard");
-
+  const $scoreboard = $("<table>").addClass("scoreboard")
+  $scoreboard.append($("<thead>"+"</thead>").addClass("scorehead").append($("<td>"+"User"+"</td>").addClass("scoretd"),$("<td>"+"Score"+"</td>").addClass("scoretd"),$("<td>"+"Avatar"+"</td>").addClass("scoretd")));
   const $livechat = $("<form onsubmit='return false'>").addClass("chatform");
-  const $chat = $("<div>").addClass("chatbox")
+  const $chat = $("<div>").addClass("chatbox").append($("<h2>"+"Chat"+"</h2>").addClass("chath2"));
   let $typed = $("<input type='text' placeholder='LiveChat Here'>").addClass("chatinput");
   $livechat.append($typed);
   $livechat.append( $("<input type='submit' value='Go'>").addClass("chatsubmit"));
@@ -104,18 +104,22 @@ $(() => {
     }).fadeIn(100).delay(1000);
     // $gamebutton.show();
     if (scores[username]!=null) {
-      scores[username]++;
+    if (scores[username]["score"]!=null) {
+      scores[username].score++;
     }
-    else {
-      scores[username]=1;
+  }else {
+    scores[username]={
+      score:1,
+      avatar:user.avatar||"https://i5.walmartimages.com/asr/f752abb3-1b49-4f99-b68a-7c4d77b45b40_1.39d6c524f6033c7c58bd073db1b99786.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF"
     }
+  }
 
     console.log(scores);
     console.log("My Score: "+scores[username]);
     $scoreboard.empty();
-    $scoreboard.append($("<thead>"+"</thead>").addClass("scorehead").append($("<td>"+"User"+"</td>").addClass("scoretd"),$("<td>"+"Score"+"</td>").addClass("scoretd")));
+    $scoreboard.append($("<thead>"+"</thead>").addClass("scorehead").append($("<td>"+"User"+"</td>").addClass("scoretd"),$("<td>"+"Score"+"</td>").addClass("scoretd"),$("<td>"+"Avatar"+"</td>").addClass("scoretd")));
     for (let key in scores) {
-      $scoreboard.append($("<tr>").addClass("scorerow").append($("<td>"+key+"</td>").addClass("scoretd"),$("<td>"+scores[key]+"</td>").addClass("scoretd")));
+      $scoreboard.append($("<tr>").addClass("scorerow").append($("<td>"+key+"</td>").addClass("scoretd"),$("<td>"+scores[key].score+"</td>").addClass("scoretd"),$("<td>").addClass("scoretd").append($("<img>").addClass("scoreimg").attr("src",scores[key].avatar))));
     }
 
     socket.emit('myClick', {
@@ -144,7 +148,7 @@ $(() => {
     $scoreboard.empty();
     $scoreboard.append($("<thead>"+"</thead>").addClass("scorehead").append($("<td>"+"User"+"</td>").addClass("scoretd"),$("<td>"+"Score"+"</td>").addClass("scoretd")));
     for (let key in scores) {
-      $scoreboard.append($("<tr>").addClass("scorerow").append($("<td>"+key+"</td>").addClass("scoretd"),$("<td>"+scores[key]+"</td>").addClass("scoretd")));
+      $scoreboard.append($("<tr>").addClass("scorerow").append($("<td>"+key+"</td>").addClass("scoretd"),$("<td>"+scores[key].score+"</td>").addClass("scoretd"),$("<td>"+scores[key].avatar+"</td>").addClass("scoretd")));
     }
 
   });
