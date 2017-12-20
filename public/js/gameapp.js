@@ -98,7 +98,7 @@ $(() => {
       return Math.floor(Math.random() * (max - min)) + min;
     }
     let color = '#'+ Math.round(0xffffff * Math.random()).toString(16);
-    let posx = getPosition($game.position().left,$("#game").width()-$gamebutton.width());
+    let posx = getPosition($game.position().left,$("#game").width());
     let posy = getPosition($game.position().top,$("#game").height()-$gamebutton.height());
     console.log("PosX: "+posx+"   PosY: "+posy);
     $gamebutton.css({
