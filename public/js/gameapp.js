@@ -52,27 +52,31 @@ $(() => {
   const $game = $("#game")
   const $scoreboard = $("<table>").addClass("scoreboard")
   $scoreboard.append($("<thead>"+"</thead>").addClass("scorehead").append($("<td>"+"User"+"</td>").addClass("scoretd"),$("<td>"+"Score"+"</td>").addClass("scoretd"),$("<td>"+"Avatar"+"</td>").addClass("scoretd")));
+
+  $scoreboard.append($("<tr>").addClass("scorerow").append($("<td>"+"Player"+"</td>").addClass("scoretd"),$("<td>"+"5"+"</td>").addClass("scoretd"),$("<td>").addClass("scoretd").append($("<img>").addClass("scoreimg").attr("src","https://cdn0.iconfinder.com/data/icons/avatars-6/500/Avatar_boy_man_people_account_player-512.png"))));
+
   const $livechat = $("<form onsubmit='return false'>").addClass("chatform");
-  const $chat = $("<div>").addClass("chatbox").append($("<p>"+"Chat"+"</p>").addClass("chath2"));
+  const $chat = $("<div>").addClass("chatbox").append($("<h2>"+"Chat"+"</h2>").addClass("chath2"));
+  $livechat.append( $("<input type='submit' value='Go'>").addClass("chatsubmit"));
   let $typed = $("<input type='text' placeholder='LiveChat Here'>").addClass("chatinput");
   $livechat.append($typed);
-  $livechat.append( $("<input type='submit' value='Go'>").addClass("chatsubmit"));
   $livechat.submit(() => {
     allchats.push($typed.val())
     $chat.empty();
     for (chat of allchats) {
-      $chat.append($("<p>"+chat+"</p>").addClass("chath2"))
+      $chat.append($("<h2>"+chat+"</h2>").addClass("chath2"))
+      $chat.append($("<hr>").addClass("chathr"));
     }
 
     socket.emit('newChat', {
       allchats:allchats
     })
-      // $typed.val("");
+      $typed.val("");
 
 
   });
   $game.css({
-    width:'800px',
+    // width:'800px',
     height:'600px',
     overflow:"hidden"
   })
@@ -80,8 +84,10 @@ $(() => {
   $game.append($gamebutton.hide());
   $gamecontainer.append($livechat);
   $gamecontainer.append($scoreboard);
-  $gamecontainer.append($chat);
   $gamecontainer.append($game);
+  $gamecontainer.append($chat);
+
+
 
   let scores = {}
 
@@ -110,7 +116,7 @@ $(() => {
   }else {
     scores[username]={
       score:1,
-      avatar:user.avatar||"https://i5.walmartimages.com/asr/f752abb3-1b49-4f99-b68a-7c4d77b45b40_1.39d6c524f6033c7c58bd073db1b99786.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF"
+      avatar:user.avatar||"https://cdn0.iconfinder.com/data/icons/avatars-6/500/Avatar_boy_man_people_account_player-512.png"
     }
   }
 
@@ -157,7 +163,8 @@ $(() => {
     allchats=data.allchats;
     $chat.empty();
     for (chat of allchats) {
-      $chat.append($("<p>"+chat+"</p>").addClass("chath2"))
+      $chat.append($("<h2>"+chat+"</h2>").addClass("chath2"))
+      $chat.append($("<hr>").addClass("chathr"))
     }
   });
 
