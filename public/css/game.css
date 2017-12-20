@@ -1,19 +1,22 @@
 .gamecontainer{
-  background: orange;
+  background: #bcefff;
+  width: 60%;
+  margin: 0 auto;
 }
 .scorebutton{
   background-color: red;
 }
 .joinbutton{
-  background-color: yellow;
+  background-color: #00b3ef;
+  color: #bcefff;
 }
 #game{
-  background-color: green;
+  background-color: #b9ffb5;
   padding: 20px;
 }
 
 .chatform{
-  background-color: blue;
+  background-color: #246eb9;
 }
 .chatbox{
   background-color: pink;
