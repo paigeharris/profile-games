@@ -1,7 +1,11 @@
 .gamecontainer{
   background: #bcefff;
-  width: 60%;
-  margin: 0 auto;
+  width: 100%;
+
+  /*margin: 0 auto;*/
+  box-sizing: border-box;
+  /*display: flex;
+  flex-flow: row;*/
 }
 .scorebutton{
   background-color: red;
@@ -12,48 +16,66 @@
 }
 #game{
   background-color: #b9ffb5;
-  padding: 20px;
+  /*padding: 20px;*/
+  width: 70%;
+  height: auto;
+  float: left;
+  box-sizing: border-box;
 }
 
 .chatform{
   background-color: #246eb9;
+  width: 100%;
+  float:right;
 }
 .chatbox{
   background-color: pink;
+  width: 15%;
+  box-sizing: border-box;
+  display: block;
   float: right;
 
 }
 .chatinput{
   font-size: 1.1em;
+  float:right;
 }
 .chatsubmit{
   font-size: 1.1em;
   background-color: red;
+  float:right;
 }
 .chath2{
   color:red;
+  width: 100%;
 }
 
 .scoreboard{
-  background-color: #b9ffb5;
-  float: right;
+  display: block;
+  background-color:#bcefff;
+  box-sizing: border-box;
+  float: left;
+  width: 15%;
 }
 
 .scorehead{
   background-color: skyblue;
+  width: 99%;
 }
 
 .scorerow{
   background-color: orange;
+  width: 99%;
 }
 
 .scoretd{
   background-color: #002D5B;
   color: #00b9f7;
-  font-size: 25px;
+  font-size: 100%;
+  width: 33.3%;
 }
 
 .scoreimg{
-  width: 50px;
+  width: 100%;
   height: 50px;
 }
