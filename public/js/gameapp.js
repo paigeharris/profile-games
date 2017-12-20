@@ -153,7 +153,7 @@ $(() => {
     allchats=data.allchats;
     $chat.empty();
     for (chat of allchats) {
-      $chat.append($("<h2>"+chat+"</h2>"))
+      $chat.append($("<h2>"+chat+"</h2>").addClass("chath2"))
     }
   });
 
