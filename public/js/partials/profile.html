@@ -6,7 +6,7 @@
     <p>Name: {{ctrl.user.username}}</p>
     <p><img class="profile-img" ng-src="{{ctrl.user.avatar}}" alt="profile picture"></p>
     <p>About me: {{ctrl.user.aboutme}}</p>
-    <button ng-click="ctrl.useredit=true" type="button" placename="button">EDIT Profile</button>
+    <center><button ng-click="ctrl.useredit = !ctrl.useredit" type="button" placename="button">Edit Profile</button></center>
 
     <div ng-if="ctrl.useredit">
       <form ng-submit="ctrl.editUser()">
@@ -17,8 +17,7 @@
         <button type="submit" name="button">Change Me</button>
         <button ng-click="ctrl.deleteUser()" type="button" name="button">Delete Account</button>
       </form>
-
     </div>
-  </div>
 
+  </div>
 </div>

@@ -35,6 +35,8 @@
 		<div ng-if='ctrl.profile' ng-include=" '/js/partials/profile.html' "></div>
 		<div ng-if='ctrl.about' ng-include=" '/js/partials/AboutUs.html' "></div>
 		<div ng-if='ctrl.contact' ng-include=" '/js/partials/contact.html' "></div>
+		<div ng-if='ctrl.players' ng-include=" '/js/partials/all.html' "></div>
+
 		<form ng-if='ctrl.user.logged' ng-submit='ctrl.logoutUser()'>
 			<input class="button" type="submit" value="Logout" />
 		</form>

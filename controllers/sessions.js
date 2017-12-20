@@ -36,4 +36,19 @@ router.get('/', async (req, res) => {
   }
 });
 
+
+
+router.get('/all', async (req, res) => {
+if (req.session.user !== undefined){
+  try{
+    const AllUsers = await User.find();
+    res.status(200).json(AllUsers); //COME BACK TO THIS!!!
+  } catch (err) {
+    res.status(400).json({err: err.message });
+  }
+} else{
+  res.send('Please log in!')
+}
+});
+
 module.exports = router;
