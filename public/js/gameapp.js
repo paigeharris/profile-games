@@ -5,8 +5,8 @@ socket.connect();
 let user ="unchanged";
 let username ="unchanged";
 let allchats = [];
-const $gamebutton = $("<button>"+"Click Me To Score"+"</button>")
-let $startgame = $("<button data-ng-click='gctrl.getUser()'>"+"Join Game"+"</button>").click((e) => {
+const $gamebutton = $("<button>"+"Click Me To Score"+"</button>").addClass("scorebutton");
+let $startgame = $("<button data-ng-click='gctrl.getUser()'>"+"Join Game"+"</button>").addClass("joinbutton").click((e) => {
   socket.emit('newUser', {
 
   })
@@ -48,20 +48,20 @@ app.controller("GameController", ["$http","$compile","$scope", function($http,$c
 $(() => {
   //onload
 
-
+  const $gamecontainer = $(".gamecontainer");
   const $game = $("#game")
-  const $scoreboard = $("<table>");
+  const $scoreboard = $("<table>").addClass("scoreboard");
 
-  const $livechat = $("<form onsubmit='return false'>")
-  const $chat = $("<div>")
-  let $typed = $("<input type='text' placeholder='LiveChat Here'>")
+  const $livechat = $("<form onsubmit='return false'>").addClass("chatform");
+  const $chat = $("<div>").addClass("chatbox")
+  let $typed = $("<input type='text' placeholder='LiveChat Here'>").addClass("chatinput");
   $livechat.append($typed);
-  $livechat.append( $("<input type='submit' value='Go'>"));
+  $livechat.append( $("<input type='submit' value='Go'>").addClass("chatsubmit"));
   $livechat.submit(() => {
     allchats.push($typed.val())
     $chat.empty();
     for (chat of allchats) {
-      $chat.append($("<h2>"+chat+"</h2>"))
+      $chat.append($("<h2>"+chat+"</h2>").addClass("chath2"))
     }
 
     socket.emit('newChat', {
@@ -74,14 +74,15 @@ $(() => {
   $game.css({
     width:'800px',
     height:'600px',
-    "background-color":"gray",
     overflow:"hidden"
   })
-  $game.append($startgame)
+  $gamecontainer.append($startgame)
   $game.append($gamebutton.hide());
-  $game.append($livechat);
-  $game.append($scoreboard);
-  $game.append($chat);
+  $gamecontainer.append($livechat);
+  $gamecontainer.append($scoreboard);
+  $gamecontainer.append($chat);
+  $gamecontainer.append($game);
+
   let scores = {}
 
   $gamebutton.on("click",() => {
@@ -112,9 +113,9 @@ $(() => {
     console.log(scores);
     console.log("My Score: "+scores[username]);
     $scoreboard.empty();
-    $scoreboard.append($("<thead>"+"</thead>").append($("<td>"+"User"+"</td>"),$("<td>"+"Score"+"</td>")));
+    $scoreboard.append($("<thead>"+"</thead>").addClass("scorehead").append($("<td>"+"User"+"</td>").addClass("scoretd"),$("<td>"+"Score"+"</td>").addClass("scoretd")));
     for (let key in scores) {
-      $scoreboard.append($("<tr>").append($("<td>"+key+"</td>"),$("<td>"+scores[key]+"</td>")));
+      $scoreboard.append($("<tr>").addClass("scorerow").append($("<td>"+key+"</td>").addClass("scoretd"),$("<td>"+scores[key]+"</td>").addClass("scoretd")));
     }
 
     socket.emit('myClick', {
