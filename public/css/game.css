@@ -1,0 +1,48 @@
+.gamecontainer{
+  background: orange;
+}
+.scorebutton{
+  background-color: red;
+}
+.joinbutton{
+  background-color: yellow;
+}
+#game{
+  background-color: green;
+  padding: 20px;
+}
+
+.chatform{
+  background-color: blue;
+}
+.chatbox{
+  background-color: pink;
+  float: right;
+}
+.chatinput{
+  font-size: 1.1em;
+}
+.chatsubmit{
+  font-size: 1.1em;
+  background-color: red;
+}
+.chath2{
+  color:red;
+}
+
+.scoreboard{
+  background-color: purple;
+  float: right;
+}
+
+.scorehead{
+  background-color: skyblue;
+}
+
+.scorerow{
+  background-color: orange;
+}
+
+.scoretd{
+  background-color: yellow;
+}

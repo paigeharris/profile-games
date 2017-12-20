@@ -16,7 +16,7 @@
 		<script src="js/gameapp.js" charset="utf-8"></script>
 		<link rel="stylesheet" href="/css/style.css">
 		<link href="https://fonts.googleapis.com/css?family=Bungee|Roboto+Mono" rel="stylesheet">
-
+		<link rel="stylesheet" href="/css/game.css">
 	</head>
 
 	<body ng-controller="MainController as ctrl">
@@ -42,10 +42,12 @@
 		</form>
 		<button ng-click="ctrl.toggleGame()">Show Game</button>
 		<div ng-controller="GameController as gctrl" ng-show="ctrl.showgame" >
-			<div id="game">
-				
-			</div>
+			<div class="gamecontainer">
 
+			<div id="game">
+
+			</div>
+			</div>
 
 		</div>
 	</body>
