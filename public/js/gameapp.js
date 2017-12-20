@@ -142,9 +142,9 @@ $(() => {
     }).fadeIn(100).delay(1000);
     // $gamebutton.show();
     $scoreboard.empty();
-    $scoreboard.append($("<thead>"+"</thead>").append($("<td>"+"User"+"</td>"),$("<td>"+"Score"+"</td>")));
+    $scoreboard.append($("<thead>"+"</thead>").addClass("scorehead").append($("<td>"+"User"+"</td>").addClass("scoretd"),$("<td>"+"Score"+"</td>").addClass("scoretd")));
     for (let key in scores) {
-      $scoreboard.append($("<tr>").append($("<td>"+key+"</td>"),$("<td>"+scores[key]+"</td>")));
+      $scoreboard.append($("<tr>").addClass("scorerow").append($("<td>"+key+"</td>").addClass("scoretd"),$("<td>"+scores[key]+"</td>").addClass("scoretd")));
     }
 
   });
@@ -153,7 +153,7 @@ $(() => {
     allchats=data.allchats;
     $chat.empty();
     for (chat of allchats) {
-      $chat.append($("<h2>"+chat+"</h2>"))
+      $chat.append($("<h2>"+chat+"</h2>").addClass("chath2"))
     }
   });
 
