@@ -32,13 +32,13 @@ app.controller("GameController", ["$http","$compile","$scope", function($http,$c
       this.user=response.data;
       user = response.data;
       username=response.data.username||Math.round(0xffffff * Math.random()).toString(16);
-        newuser=false;
+      newuser=false;
 
     }).catch((err) => {
       console.log(err);
     })
   }
-  }]);
+}]);
 //end GameController
 
 
@@ -57,8 +57,10 @@ $(() => {
 
   const $livechat = $("<form onsubmit='return false'>").addClass("chatform");
   const $chat = $("<div>").addClass("chatbox").append($("<h2>"+"Chat"+"</h2>").addClass("chath2"));
+
   $livechat.append( $("<input type='submit' value='Go'>").addClass("chatsubmit"));
   let $typed = $("<input type='text' placeholder='LiveChat Here'>").addClass("chatinput");
+
   $livechat.append($typed);
   $livechat.submit(() => {
     allchats.push($typed.val())
@@ -71,7 +73,7 @@ $(() => {
     socket.emit('newChat', {
       allchats:allchats
     })
-      $typed.val("");
+    $typed.val("");
 
 
   });
@@ -110,15 +112,15 @@ $(() => {
     }).fadeIn(100).delay(1000);
     // $gamebutton.show();
     if (scores[username]!=null) {
-    if (scores[username]["score"]!=null) {
-      scores[username].score++;
+      if (scores[username]["score"]!=null) {
+        scores[username].score++;
+      }
+    }else {
+      scores[username]={
+        score:1,
+        avatar:user.avatar||"https://cdn0.iconfinder.com/data/icons/avatars-6/500/Avatar_boy_man_people_account_player-512.png"
+      }
     }
-  }else {
-    scores[username]={
-      score:1,
-      avatar:user.avatar||"https://cdn0.iconfinder.com/data/icons/avatars-6/500/Avatar_boy_man_people_account_player-512.png"
-    }
-  }
 
     console.log(scores);
     console.log("My Score: "+scores[username]);
@@ -137,7 +139,7 @@ $(() => {
 
     });
   });
-
+  //end gamebutton click
 
 
   socket.on('myClick', function (data) {
@@ -158,6 +160,7 @@ $(() => {
     }
 
   });
+  // end recieve newclick
   socket.on("newChat", function (data) {
     console.log(data);
     allchats=data.allchats;
@@ -167,6 +170,7 @@ $(() => {
       $chat.append($("<hr>").addClass("chathr"))
     }
   });
+  // end recieve newchat
 
   socket.on("newUser", function (data) {
     console.log(data);
@@ -182,7 +186,7 @@ $(() => {
 
 
     });
-
+    // end recieve newuser
 
 
   });
