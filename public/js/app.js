@@ -1,5 +1,6 @@
 const app = angular.module("Profile-GamesApp", []);
 
+
 app.controller("MainController", ["$http", function($http) {
   //begin MainController
   // ctrl variables
@@ -10,6 +11,7 @@ app.controller("MainController", ["$http", function($http) {
   this.profile = false;
   this.about = false;
   this.contact= false;
+  this.useredit= false;
   // ctrl functions
 
   //---------------toggleGame-----------------------//
@@ -42,7 +44,12 @@ app.controller("MainController", ["$http", function($http) {
   }
   //------------ProfileModal---------------------//
   this.openProfile = () => {
+    if (this.user.logged){
+
     this.profile = true;
+  }else {
+    this.error=true;
+  }
   }
 
   this.closeProfile = () => {
@@ -77,32 +84,88 @@ app.controller("MainController", ["$http", function($http) {
       url: '/users',
       method: 'post',
       data: this.newUserForm
-    }).then(response => {
+    }).then((response) => {
       console.log('Successful registration');
+      // updateUser(response.data);
       this.user = response.data;
+      this.newUserForm = {};
+      this.error = null;
+      this.user.logged=true;
     }, ex => {
       console.log(ex.data.err);
-      this.error = ex.statusText;
-    }).catch(err => this.error = 'Is server working?');
+      // this.error = ex.statusText;
+      this.registerError = 'Incorrect username?';
+    }).catch(err => this.error = '');
   };
 
-  this.loginUser = () => {
+
+  this.editUser = () => {
     $http({
+      url: '/users/' + this.user._id,
+      method: 'put',
+      data: this.user
+    }).then((response) => {
+      this.useredit=false;
+    },(ex) => {
+      console.log(ex.data.err);
+
+    }).catch((err) => {
+      console.log(err);
+    })
+  }
+
+  this.deleteUser = () => {
+    $http({
+      url: '/users/' + this.user._id,
+      method: 'DELETE'
+    }).then((response) => {
+      this.user=null;
+      this.useredit=false;
+      this.closeProfile();
+    },(ex) => {
+      console.log(ex.data.err);
+    }).catch((err) => {
+      console.log(err);
+    })
+  }
+
+  this.loginUser = () => {
+    console.log("login user function is running");
+    $http({
+
       url: '/sessions/login',
       method: 'post',
       data: this.loginForm
+    }).then((response) =>{
+      // updateUser(response.data);
+      this.user = response.data;
+      this.user.logged=true;
+      console.log(this.user.username);
+      this.loginForm = {};
+      this.error = null;
+    }, ex => {
+      console.log('ex'. ex.data.err);
+      this.loginError = ex.statusText;
     })
+    .catch(err => this.loginError = 'Something went wrong');
   };
 
 
   this.logoutUser = () => {
+    console.log('log out button is clicked');
     $http({
       url: '/sessions/logout',
       method: 'delete'
     }).then((response) => {
       console.log(response.data);
+
+      user = {};
+      this.user.logged = false;
       this.user = null;
-    });
+    }, ex => {
+      this.loginError = ex.statusText;
+    })
+    .catch(err => this.loginError = 'Something went wrong');
   };
 
 
