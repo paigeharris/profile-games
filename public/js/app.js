@@ -49,7 +49,7 @@ app.controller("MainController", ["$http", function($http) {
 
     this.profile = true;
   }else {
-    this.error=true;
+    this.openlogreg();
   }
   }
 
