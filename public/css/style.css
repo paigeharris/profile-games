@@ -20,6 +20,11 @@ h2 {
 	margin-left: auto;
 }
 
+.showbutton{
+	width: 60%;
+margin: 0 auto;
+}
+
 .navicon {
   width: 35px;
   height: 5px;

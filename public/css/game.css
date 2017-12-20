@@ -21,6 +21,7 @@
 .chatbox{
   background-color: pink;
   float: right;
+
 }
 .chatinput{
   font-size: 1.1em;
@@ -34,7 +35,7 @@
 }
 
 .scoreboard{
-  background-color: purple;
+  background-color: #b9ffb5;
   float: right;
 }
 
@@ -47,7 +48,9 @@
 }
 
 .scoretd{
-  background-color: yellow;
+  background-color: #002D5B;
+  color: #00b9f7;
+  font-size: 25px;
 }
 
 .scoreimg{
