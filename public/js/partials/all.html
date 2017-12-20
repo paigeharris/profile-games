@@ -1,12 +1,15 @@
 <div id="all">
   <div class="modal-textbox">
 
-    <h1>All Players</h1>
-    <h3 ng-click="ctrl.closePlayers()">x</h3>
-  <div ng-repeat='player in ctrl.Players'>
-      <h3>{{player.username}}</h3>
-        <img ng-src="{{player.avatar}}" alt="profile">
+    <h2>All Players</h2>
 
-  </div>
+    <h3 class="close" ng-click="ctrl.closePlayers()">x</h3>
+    <div class="all-players">
+      <div class="one-player" ng-repeat='player in ctrl.Players'>
+        <img class="profile-img" ng-src="{{player.avatar}}" alt="profile">
+        <h3>{{player.username}}</h3>
+      </div>
+    </div>
+
   </div>
 </div>
