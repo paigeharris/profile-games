@@ -95,7 +95,8 @@ h2 {
 	align-items: flex-start;
 	overflow: scroll;
 	height: 500px;
-	/*width: 600px;*/
+	text-align: center;
+	overflow-x: hidden
 }
 
 .one-player {
