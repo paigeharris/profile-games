@@ -4,7 +4,7 @@ socket.connect();
 
 let user ="unchanged";
 let username ="unchanged";
-let allchats = [];
+let allchats = ["Chat"];
 const $gamebutton = $("<button>"+"Click Me To Score"+"</button>").addClass("scorebutton");
 let $startgame = $("<button data-ng-click='gctrl.getUser()'>"+"Join Game"+"</button>").addClass("joinbutton").click((e) => {
   socket.emit('newUser', {
@@ -50,29 +50,33 @@ $(() => {
 
   const $gamecontainer = $(".gamecontainer");
   const $game = $("#game")
-  const $scoreboard = $("<table>").addClass("scoreboard");
+  const $scoreboard = $("<table>").addClass("scoreboard")
+  $scoreboard.append($("<thead>"+"</thead>").addClass("scorehead").append($("<td>"+"User"+"</td>").addClass("scoretd"),$("<td>"+"Score"+"</td>").addClass("scoretd"),$("<td>"+"Avatar"+"</td>").addClass("scoretd")));
+
+  $scoreboard.append($("<tr>").addClass("scorerow").append($("<td>"+"Player"+"</td>").addClass("scoretd"),$("<td>"+"5"+"</td>").addClass("scoretd"),$("<td>").addClass("scoretd").append($("<img>").addClass("scoreimg").attr("src","https://cdn0.iconfinder.com/data/icons/avatars-6/500/Avatar_boy_man_people_account_player-512.png"))));
 
   const $livechat = $("<form onsubmit='return false'>").addClass("chatform");
-  const $chat = $("<div>").addClass("chatbox")
+  const $chat = $("<div>").addClass("chatbox").append($("<h2>"+"Chat"+"</h2>").addClass("chath2"));
+  $livechat.append( $("<input type='submit' value='Go'>").addClass("chatsubmit"));
   let $typed = $("<input type='text' placeholder='LiveChat Here'>").addClass("chatinput");
   $livechat.append($typed);
-  $livechat.append( $("<input type='submit' value='Go'>").addClass("chatsubmit"));
   $livechat.submit(() => {
     allchats.push($typed.val())
     $chat.empty();
     for (chat of allchats) {
       $chat.append($("<h2>"+chat+"</h2>").addClass("chath2"))
+      $chat.append($("<hr>").addClass("chathr"));
     }
 
     socket.emit('newChat', {
       allchats:allchats
     })
-      // $typed.val("");
+      $typed.val("");
 
 
   });
   $game.css({
-    width:'800px',
+    // width:'800px',
     height:'600px',
     overflow:"hidden"
   })
@@ -80,8 +84,10 @@ $(() => {
   $game.append($gamebutton.hide());
   $gamecontainer.append($livechat);
   $gamecontainer.append($scoreboard);
-  $gamecontainer.append($chat);
   $gamecontainer.append($game);
+  $gamecontainer.append($chat);
+
+
 
   let scores = {}
 
@@ -104,18 +110,22 @@ $(() => {
     }).fadeIn(100).delay(1000);
     // $gamebutton.show();
     if (scores[username]!=null) {
-      scores[username]++;
+    if (scores[username]["score"]!=null) {
+      scores[username].score++;
     }
-    else {
-      scores[username]=1;
+  }else {
+    scores[username]={
+      score:1,
+      avatar:user.avatar||"https://cdn0.iconfinder.com/data/icons/avatars-6/500/Avatar_boy_man_people_account_player-512.png"
     }
+  }
 
     console.log(scores);
     console.log("My Score: "+scores[username]);
     $scoreboard.empty();
-    $scoreboard.append($("<thead>"+"</thead>").addClass("scorehead").append($("<td>"+"User"+"</td>").addClass("scoretd"),$("<td>"+"Score"+"</td>").addClass("scoretd")));
+    $scoreboard.append($("<thead>"+"</thead>").addClass("scorehead").append($("<td>"+"User"+"</td>").addClass("scoretd"),$("<td>"+"Score"+"</td>").addClass("scoretd"),$("<td>"+"Avatar"+"</td>").addClass("scoretd")));
     for (let key in scores) {
-      $scoreboard.append($("<tr>").addClass("scorerow").append($("<td>"+key+"</td>").addClass("scoretd"),$("<td>"+scores[key]+"</td>").addClass("scoretd")));
+      $scoreboard.append($("<tr>").addClass("scorerow").append($("<td>"+key+"</td>").addClass("scoretd"),$("<td>"+scores[key].score+"</td>").addClass("scoretd"),$("<td>").addClass("scoretd").append($("<img>").addClass("scoreimg").attr("src",scores[key].avatar))));
     }
 
     socket.emit('myClick', {
@@ -142,9 +152,9 @@ $(() => {
     }).fadeIn(100).delay(1000);
     // $gamebutton.show();
     $scoreboard.empty();
-    $scoreboard.append($("<thead>"+"</thead>").append($("<td>"+"User"+"</td>"),$("<td>"+"Score"+"</td>")));
+    $scoreboard.append($("<thead>"+"</thead>").addClass("scorehead").append($("<td>"+"User"+"</td>").addClass("scoretd"),$("<td>"+"Score"+"</td>").addClass("scoretd")));
     for (let key in scores) {
-      $scoreboard.append($("<tr>").append($("<td>"+key+"</td>"),$("<td>"+scores[key]+"</td>")));
+      $scoreboard.append($("<tr>").addClass("scorerow").append($("<td>"+key+"</td>").addClass("scoretd"),$("<td>"+scores[key].score+"</td>").addClass("scoretd"),$("<td>"+scores[key].avatar+"</td>").addClass("scoretd")));
     }
 
   });
@@ -153,7 +163,8 @@ $(() => {
     allchats=data.allchats;
     $chat.empty();
     for (chat of allchats) {
-      $chat.append($("<h2>"+chat+"</h2>"))
+      $chat.append($("<h2>"+chat+"</h2>").addClass("chath2"))
+      $chat.append($("<hr>").addClass("chathr"))
     }
   });
 

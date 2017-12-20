@@ -10,9 +10,9 @@
 
     <div ng-if="ctrl.useredit">
       <form ng-submit="ctrl.editUser()">
-        <input ng-model="ctrl.user.username" type="text" name="" value="">
-        <input ng-model="ctrl.user.avatar" type="text" name="" value="">
-        <input ng-model="ctrl.user.aboutme" type="text" name="" value="">
+        <input ng-model="ctrl.user.username" type="text" value="{{ctrl.user.username}}">
+        <input ng-model="ctrl.user.avatar" type="text" value="{{ctrl.user.avatar}}">
+        <input ng-model="ctrl.user.aboutme" type="text" value="{{ctrl.user.aboutme}}">
         <input type="hidden" ng-model="ctrl.user._id">
         <button type="submit" name="button">Change Me</button>
         <button ng-click="ctrl.deleteUser()" type="button" name="button">Delete Account</button>
