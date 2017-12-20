@@ -7,6 +7,9 @@ let username ="unchanged";
 let allchats = [];
 const $gamebutton = $("<button>"+"Click Me To Score"+"</button>")
 let $startgame = $("<button data-ng-click='gctrl.getUser()'>"+"Join Game"+"</button>").click((e) => {
+  socket.emit('newUser', {
+
+  })
   $(this).hide();
   $gamebutton.show();
 })
@@ -20,6 +23,7 @@ app.controller("GameController", ["$http","$compile","$scope", function($http,$c
   console.log("hey")
   this.getUser = () => {
     console.log("clicked");
+    username=Math.round(0xffffff * Math.random()).toString(16);
     $http({
       url:"/sessions",
       method:"get"
@@ -27,7 +31,7 @@ app.controller("GameController", ["$http","$compile","$scope", function($http,$c
       console.log(response.data);
       this.user=response.data;
       user = response.data;
-      username=response.data.username;
+      username=response.data.username||Math.round(0xffffff * Math.random()).toString(16);
         newuser=false;
 
     }).catch((err) => {
@@ -97,7 +101,7 @@ $(() => {
       'top':posy+'px',
       'background-color': color
     }).fadeIn(100).delay(1000);
-    $gamebutton.show();
+    // $gamebutton.show();
     if (scores[username]!=null) {
       scores[username]++;
     }
