@@ -61,7 +61,7 @@ $(() => {
     allchats.push($typed.val())
     $chat.empty();
     for (chat of allchats) {
-      $chat.append($("<h2>"+chat+"</h2>").addClass("chath2"))
+      $chat.append($("<p>"+chat+"</p>").addClass("chath2"))
     }
 
     socket.emit('newChat', {
@@ -157,7 +157,7 @@ $(() => {
     allchats=data.allchats;
     $chat.empty();
     for (chat of allchats) {
-      $chat.append($("<h2>"+chat+"</h2>").addClass("chath2"))
+      $chat.append($("<p>"+chat+"</p>").addClass("chath2"))
     }
   });
 
