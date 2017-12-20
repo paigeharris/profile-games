@@ -38,13 +38,13 @@
 		<div ng-if='ctrl.players' ng-include=" '/js/partials/all.html' "></div>
 
 		<form ng-if='ctrl.user.logged' ng-submit='ctrl.logoutUser()'>
-			<input class="button" type="submit" value="Logout" />
+			<input class="button logout" type="submit" value="Logout" />
 		</form>
 		<button ng-class="showbutton" ng-click="ctrl.toggleGame()" >Show Game</button>
 
 		<div ng-controller="GameController as gctrl" ng-show="ctrl.showgame" >
 			<div class="gamecontainer">
-	
+
 
 			<div id="game">
 
