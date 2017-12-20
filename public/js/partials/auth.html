@@ -1,9 +1,6 @@
 <div ng-if='!ctrl.user.logged'>
-
-
   <div id="logreg">
     <div class="modal-textbox">
-
 
   <h3 class="close" ng-click="ctrl.closelogreg()">x</h3>
 
@@ -14,10 +11,6 @@
     <input class="button" type="submit" value="Log In"/>
   </form>
 
-
-
-
-
   <p>Register</p>
   <form ng-submit='ctrl.registerUser()'>
     <input type="text" placeholder="username" ng-model="ctrl.newUserForm.username" />
@@ -26,22 +19,9 @@
     <input class="button" type="submit" value="Register" />
   </form>
 
-
-      <p>{{ctrl.error}}</p>
-
-
-
-      <form ng-if='ctrl.user.logged' ng-submit='ctrl.logout()'>
-        <input type="submit" value="logout" value="Register"/>
-      </form>
+  <form ng-if='ctrl.user.logged' ng-submit='ctrl.logout()'>
+    <input type="submit" value="logout" value="Register"/>
+  </form>
     </div>
   </div>
-
-
-
-
 </div>
-
-<!-- <form ng-if='ctrl.user' ng-submit='ctrl.logout()'>
-  <input class="button" type="submit" value="Logout" />
-</form> -->
