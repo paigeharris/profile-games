@@ -138,8 +138,8 @@ $(() => {
       'left':data.posx+'px',
       'top':data.posy+'px',
       'background-color': data.color
-    }).show().fadeIn(100).delay(1000);
-    $gamebutton.show();
+    }).fadeIn(100).delay(1000);
+    // $gamebutton.show();
     $scoreboard.empty();
     $scoreboard.append($("<thead>"+"</thead>").append($("<td>"+"User"+"</td>"),$("<td>"+"Score"+"</td>")));
     for (let key in scores) {
@@ -158,10 +158,18 @@ $(() => {
 
   socket.on("newUser", function (data) {
     console.log(data);
-    if (newuser) {
-      user = data.user;
-      newuser=false;
-    }
+    // if (newuser) {
+    //   user = data.user;
+    //   newuser=false;
+    // }
+    socket.emit('myClick', {
+      color: color,
+      posx:posx,
+      posy:posy,
+      scores:scores
+
+
+    });
 
 
 
