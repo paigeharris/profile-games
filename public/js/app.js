@@ -12,6 +12,7 @@ app.controller("MainController", ["$http", function($http) {
   this.about = false;
   this.contact= false;
   this.useredit= false;
+  this.players = false;
   // ctrl functions
 
   //---------------toggleGame-----------------------//
@@ -74,6 +75,19 @@ app.controller("MainController", ["$http", function($http) {
     this.contact = false;
   }
 
+  //--------------All Players Modal----------------//
+  this.openPlayers = () => {
+    if (this.user.logged){
+      this.players = true;
+      this.AllUsers()
+    } else {
+      this.error= true;
+    }
+  }
+
+  this.closePlayers = () => {
+    this.players = false
+  }
   // --------------------------------------------
   // Users/authorization
   this.user = {};
@@ -168,7 +182,15 @@ app.controller("MainController", ["$http", function($http) {
     .catch(err => this.loginError = 'Something went wrong');
   };
 
-
+this.AllUsers = () => {
+  $http({
+    url:'/sessions/all',
+    method: 'get',
+  }).then((response) => {
+    this.Players = response.data
+console.log(this.Players);
+  })
+}
   this.hello = "Hello World";
 
 

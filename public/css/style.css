@@ -54,7 +54,7 @@ h1 {
 }
 
 /*modal*/
-#logreg, #profile, #about, #contact {
+#logreg, #profile, #about, #contact, #all {
 	background-color: rgba(0,0,50,0.4);
 	position: fixed;
 	top: 0;
