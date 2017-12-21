@@ -33,7 +33,16 @@ const setgame = () => {
 
   $scoreboard.empty();
   $scoreboard.append($("<thead>"+"</thead>").addClass("scorehead").append($("<td>"+"User"+"</td>").addClass("scoretd"),$("<td>"+"Score"+"</td>").addClass("scoretd"),$("<td>"+"Avatar"+"</td>").addClass("scoretd")));
-  for (let key in game.scores) {
+  let i = 0;
+  let keyarr =[];
+  for (let key in game.scores)  {
+    keyarr.unshift(key);
+  }
+  for (let key of keyarr) {
+    if (i>7) {
+      break;
+    }
+    i++;
     $scoreboard.append($("<tr>").addClass("scorerow").append($("<td>"+key+"</td>").addClass("scoretd"),$("<td>"+game.scores[key].score+"</td>").addClass("scoretd"),$("<td>").addClass("scoretd").append($("<img>").addClass("scoreimg").attr("src",game.scores[key].avatar))));
   }
 }
@@ -84,7 +93,7 @@ app.controller("GameController", ["$http","$compile","$scope", function($http,$c
       method:"get"
     }).then((response) => {
       if (newuser) {
-        // game=response.data;
+        game=response.data;
         newuser=false;
       }
 
