@@ -33,7 +33,7 @@
 
 .chatbox{
   background-color: #005dba;
-  width: 25%;
+  width: 20%;
   box-sizing: border-box;
   display: block;
   float: right;
@@ -67,7 +67,7 @@
   background-color:#bcefff;
   box-sizing: border-box;
   float: left;
-  width: 15%;
+  width: 20%;
 }
 
 .scorehead{
@@ -89,6 +89,6 @@
 }
 
 .scoreimg{
-  width: 100%;
-  height: 70px;
+  width: 70px;
+  height: auto;
 }
