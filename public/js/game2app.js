@@ -6,7 +6,7 @@ var Client = {};
 Client.socket = io.connect();
 
 Client.askNewPlayer = function(){
-    Client.socket.emit('newplayer');
+    Client.socket.emit('newplayer',userg2);
 };
 
 Client.sendClick = function(x,y){
@@ -99,30 +99,7 @@ xhttp.onreadystatechange = function() {
      userg2= JSON.parse(xhttp.responseText);
      console.log(userg2+" before file");
      console.log(userg2.avatar+ " avatar");
-     let file = {
-       type: 'image',
-       key: 'avatar',
-       url: userg2.avatar,
-       data: null,
-       error: false,
-       loaded: false
-     };
-       console.log(file.url+ " file url");
-     file.data = new Image();
-     file.data.name = file.key;
-     file.data.onload = function () {
-       file.loaded = true;
-       game2.cache.addImage(file.key, file.url, file.data);
-       game2.load.image("avatar");
-       game2.load.start()
-       Client.askNewPlayer();
-     };
-     file.data.onerror = function () {
-       file.error = true
-       console.log("hey",file.error);
-     };
-       // file.data.crossOrigin = '';
-       file.data.src = file.url;
+     commenceImage();
   }
   else if (this.readyState == 4 && this.status == 400) {
     console.log("sadness");
@@ -139,7 +116,28 @@ xhttp.onreadystatechange = function() {
 };
 
 const commenceImage = () => {
-
+  let file = {
+    type: 'image',
+    key: 'avatar',
+    url: userg2.avatar,
+    data: null,
+    error: false,
+    loaded: false
+  };
+    console.log(file.url+ " file url");
+  file.data = new Image();
+  file.data.name = file.key;
+  file.data.onload = function () {
+    file.loaded = true;
+    game2.cache.addImage(file.key, file.url, file.data);
+    Client.askNewPlayer();
+  };
+  file.data.onerror = function () {
+    file.error = true
+    console.log("hey",file.error);
+  };
+    // file.data.crossOrigin = '';
+    file.data.src = file.url;
 
 
 }
