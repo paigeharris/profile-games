@@ -16,7 +16,7 @@ let allchats = ["Chat"];
 const $scoreboard = $("<table>").addClass("scoreboard")
 const $livechat = $("<form onsubmit='return false'>").addClass("chatform");
 const $chat = $("<div>").addClass("chatbox").append($("<h2>"+"Chat"+"</h2>").addClass("chath2"));
-const $newbutton = $("<button data-ng-click='gctrl.newGame()'>"+"Click For DB Entry"+"</button>").addClass("newbutton");
+const $newbutton = $("<button data-ng-click='gctrl.newGame()'>"+"(Dev) For DB Entry"+"</button>").addClass("newbutton");
 const $gamebutton = $("<button data-ng-click='gctrl.setGameData()'>"+"Click Me To Score"+"</button>").addClass("scorebutton");
 
 //setgame
