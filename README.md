@@ -13,7 +13,6 @@ Heroku is a cloud platform that was used to host my web application. To view liv
  - HTML
  - CSS
  - JavaScript
- - JQuery
  - Atom
  - Mongo
  - Heroku
@@ -34,26 +33,26 @@ Heroku is a cloud platform that was used to host my web application. To view liv
 
 There was a variety of approaches because we were working on different aspects of the game. One of the first thing accomplished was a vision for the page and how things would link up.
 
-![Main Page](/Users/hectorguevara/Desktop/dev/profile-games/public/assets/main page.png)
+![Main Page](public/assets/main page.png)
 Main page Layout
 
-![Nav Bar](/Users/hectorguevara/Desktop/dev/profile-games/public/assets/nav bar.png)
+![Nav Bar](public/assets/nav bar.png)
 clicking to make nav bar populate
 
-![Log/Reg](/Users/hectorguevara/Desktop/dev/profile-games/public/assets/login modal.png)
+![Log/Reg](public/assets/login modal.png)
 Login and Register
 
-![About Us](/Users/hectorguevara/Desktop/dev/profile-games/public/assets/About Us.png)
+![About Us](public/assets/About Us.png)
 About Us
 
 Then we continued with creating the routes as well as creating the game.
 
-![Users playing](/Users/hectorguevara/Desktop/dev/profile-games/public/assets/users.png)
+![Users playing](public/assets/users.png)
 Users Playing
 
 Wanted the game to be able to integrate with the accounts populated on the page, therefore if you log in you can see your name and avatar populated. But we allowed access to anyone who didn't register to play the game as well.
 
-![socket](/Users/hectorguevara/Desktop/dev/profile-games/public/assets/socket io.png)
+![socket](public/assets/socket io.png)
 Socket.IO
 
 It was built using a realtime engine called SOCKET.IO which allowed us to implement certain features such as he live chat box, etc....
