@@ -33,26 +33,26 @@ Heroku is a cloud platform that was used to host my web application. To view liv
 
 There was a variety of approaches because we were working on different aspects of the game. One of the first thing accomplished was a vision for the page and how things would link up.
 
-![Main Page](public/assets/main page.png)
+![mainPage](public/assets/mainpage.png)
 Main page Layout
 
-![Nav Bar](public/assets/nav bar.png)
+![navBar](public/assets/navbar.png)
 clicking to make nav bar populate
 
-![Log/Reg](public/assets/login modal.png)
+![logReg](public/assets/loginmodal.png)
 Login and Register
 
-![About Us](public/assets/About Us.png)
+![aboutUs](public/assets/AboutUs.png)
 About Us
 
 Then we continued with creating the routes as well as creating the game.
 
-![Users playing](public/assets/users.png)
+![usersplaying](public/assets/users.png)
 Users Playing
 
 Wanted the game to be able to integrate with the accounts populated on the page, therefore if you log in you can see your name and avatar populated. But we allowed access to anyone who didn't register to play the game as well.
 
-![socket](public/assets/socket io.png)
+![socket](public/assets/socketio.png)
 Socket.IO
 
 It was built using a realtime engine called SOCKET.IO which allowed us to implement certain features such as he live chat box, etc....
