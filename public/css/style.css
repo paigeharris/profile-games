@@ -164,6 +164,20 @@ input {
 	color: red;
 	font-size: 50px;
 }
+
+h4{
+	text-align: center;
+	background-color:#003366;
+	color: #b9ffb5;
+	font-size: 30px;
+	width: 15%;
+	margin: 0 auto;
+
+}
+.namecontainer{
+	/* background-color:#003366; */
+	background-size: 30px;
+}
 @media screen and (max-height: 450px) {
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
