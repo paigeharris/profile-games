@@ -18,17 +18,19 @@
 		<link href="https://fonts.googleapis.com/css?family=Bungee|Roboto+Mono" rel="stylesheet">
 		<link rel="stylesheet" href="/css/game.css">
 		<link rel="shortcut icon" href="/assets/profile-games.ico" type="image/x-icon">
+		<link rel="stylesheet" type="text/css" href="csshake.min.css">
+
 	</head>
 
 	<body ng-controller="MainController as ctrl">
 
 		<h1>Profile Games</h1>
 
-		<div ng-if='ctrl.user.logged'>
-			<h3>Hi, {{ctrl.user.username}} !</h3>
+		<div ng-class="namecontainer" ng-if='ctrl.user.logged'>
+			<h4 class="name">Hi, {{ctrl.user.username}} !</h3>
 		</div>
 		<div ng-if='ctrl.error'>
-			<h3 class="error">Hey, Please log in to see profile</h3>
+			<h3 class="error shake-little">Hey, Please log in to see profile</h3>
 		</div>
 
 		<div ng-include=" '/js/partials/nav.html' "></div>
