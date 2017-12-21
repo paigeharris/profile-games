@@ -1,21 +1,58 @@
 <!DOCTYPE html>
 <html ng-app="Profile-GamesApp">
 	<head>
+
 		<meta charset="utf-8">
-		<title>Index</title>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
 
+		<title>Profile Games</title>
+
+		<script type="text/javascript" src="/socket.io/socket.io.js"></script>
 	  <script src="js/phaser.min.js" charset="utf-8"></script>
-		<script src="js/gameapp.js" charset="utf-8"></script>
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js" charset="utf-8"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://use.fontawesome.com/510b786253.js"></script>
 	  <script src="/js/app.js" charset="utf-8"></script>
+		<script src="js/gameapp.js" charset="utf-8"></script>
+		<link rel="stylesheet" href="/css/style.css">
+		<link href="https://fonts.googleapis.com/css?family=Bungee|Roboto+Mono" rel="stylesheet">
+		<link rel="stylesheet" href="/css/game.css">
+		<link rel="shortcut icon" href="/assets/profile-games.ico" type="image/x-icon">
 	</head>
-	<body ng-controller="MainController as ctrl">
-	  <h1>{{ctrl.hello}}</h1>
 
-		<button ng-click="ctrl.toggleGame()">Show Game</button>
-		<div ng-show="ctrl.showgame" id="game">
+	<body ng-controller="MainController as ctrl">
+
+		<h1>Profile Games</h1>
+
+		<div ng-if='ctrl.user.logged'>
+			<h3>Hi, {{ctrl.user.username}} !</h3>
+		</div>
+		<div ng-if='ctrl.error'>
+			<h3>Hey, Please log in to see profile</h3>
+		</div>
+
+		<div ng-include=" '/js/partials/nav.html' "></div>
+		<div ng-if='ctrl.logreg' ng-include=" '/js/partials/auth.html' "></div>
+		<div ng-if='ctrl.profile' ng-include=" '/js/partials/profile.html' "></div>
+		<div ng-if='ctrl.about' ng-include=" '/js/partials/AboutUs.html' "></div>
+		<div ng-if='ctrl.contact' ng-include=" '/js/partials/contact.html' "></div>
+		<div ng-if='ctrl.players' ng-include=" '/js/partials/all.html' "></div>
+
+		<form ng-if='ctrl.user.logged' ng-submit='ctrl.logoutUser()'>
+			<input class="button logout" type="submit" value="Logout" />
+		</form>
+		<button ng-class="showbutton" ng-click="ctrl.toggleGame()" >Show Game</button>
+
+		<div ng-controller="GameController as gctrl" ng-show="ctrl.showgame" >
+			<div class="gamecontainer">
+
+
+			<div id="game">
+
+			</div>
+			</div>
 
 		</div>
 	</body>
+
 </html>

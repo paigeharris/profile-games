@@ -5,14 +5,16 @@
   "main": "server.js",
   "dependencies": {
     "bcrypt": "^1.0.3",
+    "compile": "0.0.2",
     "express": "^4.16.2",
     "express-session": "^1.15.6",
     "http": "^0.0.0",
     "io": "^1.0.0",
-    "moment": "^2.19.4",
+    "moment": "^2.20.0",
     "mongoose": "^4.13.7",
     "morgan": "^1.9.0",
     "pretty-error": "^2.1.1",
+    "scope": "^0.10.1",
     "session": "^0.1.0",
     "socket.io": "^2.0.4"
   },

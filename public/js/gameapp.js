@@ -1,129 +1,285 @@
-
-var game = new Phaser.Game(800, 600, Phaser.AUTO, 'game', { preload: preload, create: create, update: update });
-var platforms;
-var score = 0;
-var scoreText;
-var Game = {};
-function init() {
-    game.stage.disableVisibilityChange = true;
+let newuser =true;
+let game = {
+  _id: "5a3b3510dcd7051457168ca8"
 };
-function preload() {
-  game.load.image('sky', 'assets/sky.png');
-  game.load.image('ground', 'assets/platform.png');
-  game.load.image('star', 'assets/star.png');
-  game.load.spritesheet('dude', 'assets/dude.png', 32, 48);
+let newgame = {
+color: "red",
+scores:{}
+};
+var socket = io();
+socket.connect();
+let scores = {}
+let user ="unchanged";
+let username ="unchanged";
+let allchats = ["Chat"];
 
+const $scoreboard = $("<table>").addClass("scoreboard")
+const $livechat = $("<form onsubmit='return false'>").addClass("chatform");
+const $chat = $("<div>").addClass("chatbox").append($("<h2>"+"Chat"+"</h2>").addClass("chath2"));
+const $newbutton = $("<button data-ng-click='gctrl.newGame()'>"+"(Dev) For DB Entry"+"</button>").addClass("newbutton");
+const $gamebutton = $("<button data-ng-click='gctrl.setGameData()'>"+"Click Me To Score"+"</button>").addClass("scorebutton");
+
+//setgame
+const setgame = () => {
+  console.log("setting game");
+  console.log("PosX: "+game.posx+"   PosY: "+game.posy);
+  $gamebutton.css({
+    'color' : "white",
+    'position':'relative',
+    'left':game.posx+'px',
+    'top':game.posy+'px',
+    'background-color': game.color
+  }).fadeIn(100).delay(1000);
+
+  $scoreboard.empty();
+  $scoreboard.append($("<thead>"+"</thead>").addClass("scorehead").append($("<td>"+"User"+"</td>").addClass("scoretd"),$("<td>"+"Score"+"</td>").addClass("scoretd"),$("<td>"+"Avatar"+"</td>").addClass("scoretd")));
+  let i = 0;
+  let keyarr =[];
+  for (let key in game.scores)  {
+    keyarr.unshift(key);
+  }
+  for (let key of keyarr) {
+    if (i>7) {
+      break;
+    }
+    i++;
+    $scoreboard.append($("<tr>").addClass("scorerow").append($("<td>"+key+"</td>").addClass("scoretd"),$("<td>"+game.scores[key].score+"</td>").addClass("scoretd"),$("<td>").addClass("scoretd").append($("<img>").addClass("scoreimg").attr("src",game.scores[key].avatar))));
+  }
 }
+//end setgame
+//start game
+const $startgame = $("<button data-ng-click='gctrl.getUser()'>"+"Join Game"+"</button>").addClass("joinbutton").click((e) => {
 
-function create() {
-  //  We're going to be using physics, so enable the Arcade Physics system
-  game.physics.startSystem(Phaser.Physics.ARCADE);
+  // $(this).hide();
+  // newuser=false;
+  $gamebutton.show();
+});
+// end=>start game
 
-  //  A simple background for our game
-  game.add.sprite(0, 0, 'sky');
 
-  //  The platforms group contains the ground and the 2 ledges we can jump on
-  platforms = game.add.group();
+//gamecontroller
+app.controller("GameController", ["$http","$compile","$scope", function($http,$compile,$scope) {
+  let temp1 = $compile($newbutton)($scope);
+  let temp2 = $compile($gamebutton)($scope);
+  let temp3 = $compile($startgame)($scope);
+  this.hello="heya";
+  this.user = "";
+  console.log("hey")
 
-  //  We will enable physics for any object that is created in this group
-  platforms.enableBody = true;
 
-  // Here we create the ground.
-  var ground = platforms.create(0, game.world.height - 64, 'ground');
+  this.setGameData= () => {
+    console.log(game);
+    this.game=game;
+    $http({
+      url:"/games/"+game._id,
+      method:"put",
+      data:this.game
+    }).then((response) => {
 
-  //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
-  ground.scale.setTo(2, 2);
+      // setgame();
+      console.log("Edit Res: ",response.data);
 
-  //  This stops it from falling away when you jump on it
-  ground.body.immovable = true;
 
-  //  Now let's create two ledges
-  var ledge = platforms.create(400, 400, 'ground');
+    }).catch((err) => {
+      console.log(err);
+    })
 
-  ledge.body.immovable = true;
+  };
 
-  ledge = platforms.create(-150, 250, 'ground');
+  this.getGameData= () => {
+    this.game=game;
+    $http({
+      url:"/games/"+this.game._id,
+      method:"get"
+    }).then((response) => {
+      if (newuser) {
+        game=response.data;
+        newuser=false;
+      }
 
-  ledge.body.immovable = true;
+      console.log("Get Res: ",response.data);
+      setgame();
 
-  // The player and its settings
-  player = game.add.sprite(32, game.world.height - 150, 'dude');
+    }).catch((err) => {
+      console.log(err);
+    })
+  };
 
-  //  We need to enable physics on the player
-  game.physics.arcade.enable(player);
 
-  //  Player physics properties. Give the little guy a slight bounce.
-  player.body.bounce.y = 0.2;
-  player.body.gravity.y = 300;
-  player.body.collideWorldBounds = true;
-
-  //  Our two animations, walking left and right.
-  player.animations.add('left', [0, 1, 2, 3], 10, true);
-  player.animations.add('right', [5, 6, 7, 8], 10, true);
-
-  stars = game.add.group();
-
-  stars.enableBody = true;
-
-  //  Here we'll create 12 of them evenly spaced apart
-  for (var i = 0; i < 12; i++)
-  {
-    //  Create a star inside of the 'stars' group
-    var star = stars.create(i * 70, 0, 'star');
-
-    //  Let gravity do its thing
-    star.body.gravity.y = 6;
-
-    //  This just gives each star a slightly random bounce value
-    star.body.bounce.y = 0.7 + Math.random() * 0.2;
-  }
-
-  scoreText = game.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
-}
-
-function update() {
-  var cursors = game.input.keyboard.createCursorKeys();
-  var hitPlatform = game.physics.arcade.collide(player, platforms);
-
-  player.body.velocity.x = 0;
-
-  if (cursors.left.isDown)
-  {
-    //  Move to the left
-    player.body.velocity.x = -150;
-
-    player.animations.play('left');
-  }
-  else if (cursors.right.isDown)
-  {
-    //  Move to the right
-    player.body.velocity.x = 150;
-
-    player.animations.play('right');
-  }
-  else
-  {
-    //  Stand still
-    player.animations.stop();
-
-    player.frame = 4;
-  }
-
-  //  Allow the player to jump if they are touching the ground.
-  if (cursors.up.isDown && player.body.touching.down && hitPlatform)
-  {
-    player.body.velocity.y = -320;
-  }
-  function collectStar (player, star) {
-
-    // Removes the star from the screen
-    star.kill();
-    score += 10;
-    scoreText.text = 'Score: ' + score;
+  //end getGameData
+  this.getUser = () => {
+    console.log("clicked");
+    username=Math.round(0xffffff * Math.random()).toString(16);
+    $http({
+      url:"/sessions",
+      method:"get"
+    }).then((response) => {
+      console.log(response.data);
+      this.user=response.data;
+      user = response.data;
+      username=response.data.username||Math.round(0xffffff * Math.random()).toString(16);
+      this.getGameData();
+    },(ex) => {
+      console.log("Not Logged In, Giving Random name");
+      this.getGameData();
+    }).catch((err) => {
+      console.log("Random name Given");
+    })
+    // this.getGameData();
 
   }
+  //end getUser
 
-  game.physics.arcade.collide(stars, platforms);
-  game.physics.arcade.overlap(player, stars, collectStar, null, this);
+  this.newGame= () => {
+    $http({
+      url:"/games",
+      method:"post",
+      data: newgame
+    }).then((response) => {
+      console.log(response.data);
+      game= response.data;
+      setgame();
+      console.log("New Game: ",game);
+    }).catch((err) => {
+      console.log(err);
+    })
 
-}
+  }
+  //end getGameData
+
+}]);
+//end GameController
+
+
+
+
+
+$(() => {
+  //onload
+  const $gamecontainer = $(".gamecontainer");
+  const $game = $("#game")
+  $scoreboard.append($("<thead>"+"</thead>").addClass("scorehead").append($("<td>"+"User"+"</td>").addClass("scoretd"),$("<td>"+"Score"+"</td>").addClass("scoretd"),$("<td>"+"Avatar"+"</td>").addClass("scoretd")));
+
+  $scoreboard.append($("<tr>").addClass("scorerow").append($("<td>"+"Player"+"</td>").addClass("scoretd"),$("<td>"+"5"+"</td>").addClass("scoretd"),$("<td>").addClass("scoretd").append($("<img>").addClass("scoreimg").attr("src","https://cdn0.iconfinder.com/data/icons/avatars-6/500/Avatar_boy_man_people_account_player-512.png"))));
+  $livechat.append( $("<input type='submit' value='Go'>").addClass("chatsubmit"));
+  let $typed = $("<input type='text' placeholder='LiveChat Here'>").addClass("chatinput");
+
+  $livechat.append($typed);
+  $livechat.submit(() => {
+    allchats.push($typed.val())
+    $chat.empty();
+    for (chat of allchats) {
+      $chat.append($("<h2>"+chat+"</h2>").addClass("chath2"))
+      $chat.append($("<hr>").addClass("chathr"));
+    }
+
+    socket.emit('newChat', {
+      allchats:allchats
+    })
+    $typed.val("");
+
+  });
+  $game.css({
+    // width:'800px',
+    height:'600px',
+    overflow:"hidden"
+  })
+  $gamecontainer.append($startgame)
+  $gamecontainer.append($newbutton)
+  $game.append($gamebutton.hide());
+  $gamecontainer.append($livechat);
+  $gamecontainer.append($scoreboard);
+  $gamecontainer.append($game);
+  $gamecontainer.append($chat);
+  //begin setgame
+
+//formgame
+  const formgame = () => {
+    console.log("forming game");
+    function getPosition(min, max) {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min)) + min;
+    }
+    if (game.scores[username]!=null) {
+      if (game.scores[username]["score"]!=null) {
+        game.scores[username].score++;
+      }
+    }else {
+      game.scores[username]={
+        score:1,
+        avatar:user.avatar||"https://cdn0.iconfinder.com/data/icons/avatars-6/500/Avatar_boy_man_people_account_player-512.png"
+      }
+    }
+    console.log(game.scores[username].score+": your score");
+    game.color = '#'+ Math.round(0xffffff * Math.random()).toString(16);
+    game.posx = getPosition(0,$("#game").width()-($gamebutton.width()*1.5));
+    game.posy = getPosition(0,$("#game").height()-($gamebutton.height()*1.5));
+    console.log("PosX: "+game.posx+"   PosY: "+game.posy);
+    $gamebutton.css({
+      'color' : "white",
+      'position':'relative',
+      'left':game.posx+'px',
+      'top':game.posy+'px',
+      'background-color': game.color
+    }).fadeIn(100).delay(1000);
+    $gamebutton.show();
+
+
+
+    socket.emit('myClick', game);
+    setgame();
+
+
+  };
+  //end formgame
+
+  $gamebutton.on("click",formgame)
+
+  socket.on('myClick', function (data) {
+    // var xmlHttp = new XMLHttpRequest();
+    // xmlHttp.open( "PUT", "/games/"+data._id,true);
+    // xmlHttp.send(data);
+    game = data;
+    console.log(game);
+    console.log(data.scores);
+    setgame();
+  });
+  // end recieve newclick
+  socket.on("newChat", function (data) {
+    console.log(data);
+    allchats=data.allchats;
+    $chat.empty();
+    for (chat of allchats) {
+      $chat.append($("<h2>"+chat+"</h2>").addClass("chath2"))
+      $chat.append($("<hr>").addClass("chathr"))
+    }
+  });
+  // end recieve newchat
+
+  // socket.on("newUser", function (data) {
+  //   console.log(data);
+  //   // if (newuser) {
+  //   //   user = data.user;
+  //   //   newuser=false;
+  //   // }
+  //   socket.emit('myClick', {
+  //     color: game.color,
+  //     posx:game.posx,
+  //     posy:game.posy,
+  //     scores:game.scores
+  //
+  //
+  //   });
+  //   // end recieve newuser
+  //
+  //
+  // });
+
+
+
+
+
+
+  //end onload
+})
