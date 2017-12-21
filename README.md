@@ -33,21 +33,21 @@ Heroku is a cloud platform that was used to host my web application. To view liv
 
 There was a variety of approaches because we were working on different aspects of the game. One of the first thing accomplished was a vision for the page and how things would link up.
 
-![Main Page](public/assets/main page.png)
+![MainPage](public/assets/main page.png)
 Main page Layout
 
-![Nav Bar](public/assets/nav bar.png)
+![NavBar](public/assets/nav bar.png)
 clicking to make nav bar populate
 
-![Log/Reg](public/assets/login modal.png)
+![LogReg](public/assets/login modal.png)
 Login and Register
 
-![About Us](public/assets/About Us.png)
+![AboutUs](public/assets/About Us.png)
 About Us
 
 Then we continued with creating the routes as well as creating the game.
 
-![Users playing](public/assets/users.png)
+![Usersplaying](public/assets/users.png)
 Users Playing
 
 Wanted the game to be able to integrate with the accounts populated on the page, therefore if you log in you can see your name and avatar populated. But we allowed access to anyone who didn't register to play the game as well.
