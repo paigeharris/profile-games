@@ -1,5 +1,6 @@
-/* 
+
 .game2container{
+  text-align: center;
   display: block;
   margin: auto;
 }
@@ -9,5 +10,9 @@
   overflow: visible;
   display: block;
   margin: 0 auto;
+
+}
+canvas{
+  margin: auto;
   border: 20px solid black;
-} */
+}

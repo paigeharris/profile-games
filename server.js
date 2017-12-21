@@ -74,7 +74,7 @@ app.get('/test', (req, res) => {
 })
 let game1data = {};
 let chat1 = [];
-server.lastPlayderID = 0;
+server.lastPlayerID = 0;
 io.sockets.on('connection', function (socket) {
     socket.on('myClick', function (data) {
         if (data.posx!=null) {
@@ -106,23 +106,28 @@ io.sockets.on('connection', function (socket) {
 
     socket.on('newplayer',function(){
         socket.player = {
-            id: server.lastPlayderID++,
+            id: server.lastPlayerID++,
             x: randomInt(100,400),
             y: randomInt(100,400)
+
         };
+        console.log("NewPlayer: ",socket.player);
         socket.emit('allplayers',getAllPlayers());
         socket.broadcast.emit('newplayer',socket.player);
     });
     socket.on('click',function(data){
             console.log('click to '+data.x+', '+data.y);
-            socket.player.x = data.x;
-            socket.player.y = data.y;
+            if (socket.player.x) {
+              socket.player.x = data.x;
+              socket.player.y = data.y;
+            }
+
             io.emit('move',socket.player);
         });
 
 
         // socket.on('disconnect',function(){
-        //     io.emit('remove',socket.player.id);
+        //     socket.broadcast.emit('remove',socket.player.id);
         // });
 });
 
