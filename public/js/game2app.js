@@ -96,15 +96,33 @@ var xhttp = new XMLHttpRequest();
 xhttp.onreadystatechange = function() {
   if (this.readyState == 4 && this.status == 200) {
      console.log("happiness");
-     userg2 ={
-       username : Math.round(0xffffff * Math.random()).toString(16),
-       avatar:"https://cdn0.iconfinder.com/data/icons/avatars-6/500/Avatar_boy_man_people_account_player-512.png"
-     }
-     userg2= xhttp.responseText;
-     game2.load.image("avatar",userg2.avatar)
-     game2.load.start()
-     Client.askNewPlayer();
-     console.log(userg2);
+     userg2= JSON.parse(xhttp.responseText);
+     console.log(userg2+" before file");
+     console.log(userg2.avatar+ " avatar");
+     let file = {
+       type: 'image',
+       key: 'avatar',
+       url: userg2.avatar,
+       data: null,
+       error: false,
+       loaded: false
+     };
+       console.log(file.url+ " file url");
+     file.data = new Image();
+     file.data.name = file.key;
+     file.data.onload = function () {
+       file.loaded = true;
+       game2.cache.addImage(file.key, file.url, file.data);
+       game2.load.image("avatar");
+       game2.load.start()
+       Client.askNewPlayer();
+     };
+     file.data.onerror = function () {
+       file.error = true
+       console.log("hey",file.error);
+     };
+       // file.data.crossOrigin = '';
+       file.data.src = file.url;
   }
   else if (this.readyState == 4 && this.status == 400) {
     console.log("sadness");
@@ -119,6 +137,12 @@ xhttp.onreadystatechange = function() {
     console.log(userg2);
   }
 };
+
+const commenceImage = () => {
+
+
+
+}
 //end xhttp
 
 //http request button
