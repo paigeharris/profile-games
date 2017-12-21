@@ -84,7 +84,7 @@ app.controller("GameController", ["$http","$compile","$scope", function($http,$c
       method:"get"
     }).then((response) => {
       if (newuser) {
-        game=response.data;
+        // game=response.data;
         newuser=false;
       }
 
@@ -176,7 +176,7 @@ $(() => {
     overflow:"hidden"
   })
   $gamecontainer.append($startgame)
-  $gamecontainer.append($newbutton)
+  // $gamecontainer.append($newbutton)
   $game.append($gamebutton.hide());
   $gamecontainer.append($livechat);
   $gamecontainer.append($scoreboard);
