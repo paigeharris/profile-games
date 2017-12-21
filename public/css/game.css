@@ -1,19 +1,21 @@
 .gamecontainer{
   background: #bcefff;
   width: 80%;
-
   margin: 0 auto;
   box-sizing: border-box;
   /*display: flex;
   flex-flow: row;*/
 }
+
 .scorebutton{
   background-color: red;
 }
+
 .joinbutton{
   background-color: #00b3ef;
   color: #bcefff;
 }
+
 #game{
   background-color: #b9ffb5;
   /*padding: 20px;*/
@@ -28,25 +30,35 @@
   width: 100%;
   float:right;
 }
+
 .chatbox{
-  background-color: pink;
-  width: 20%;
+  background-color: #005dba;
+  width: 25%;
   box-sizing: border-box;
   display: block;
   float: right;
-
 }
+
 .chatinput{
   font-size: 1.1em;
   float:right;
 }
+
 .chatsubmit{
-  font-size: 1.1em;
-  background-color: red;
+  background-color: #00b3ef;
   float:right;
+  font-family: 'Roboto Mono', monospace;
+  border: none;
+	margin: 3px;
+  text-align: center;
+  display: inline-block;
+	border-radius: 5px;
+  font-size: 18px;
+	cursor: pointer;
 }
+
 .chath2{
-  color:red;
+  color: #5dff51;
   width: 100%;
 }
 
@@ -55,7 +67,7 @@
   background-color:#bcefff;
   box-sizing: border-box;
   float: left;
-  width: 20%;
+  width: 15%;
 }
 
 .scorehead{
