@@ -5,77 +5,73 @@
 
 ### Deployment
 
-Heroku is a cloud platform that was used to host my web application. To view live, visit https://profile-games.herokuapp.com/
+Heroku is a cloud platform that was used to host our web application. To view live, visit https://profile-games.herokuapp.com/
 
-# Utilizing
- - MEAN Stack
- - Socket.io
+### Utilizing
+ - MongoDB/Mongoose
+ - Express
+ - Node
+ - Angular
  - HTML
  - CSS
  - JavaScript
+ - jQuery
+ - Socket.io
  - Atom
- - Mongo
- - Heroku
  - Invision
 
-# Features
+### Approach
 
-## Registration
-- Registration allows you to add a custom avatar as well as view all the other players.
-
-- The game is still playable without a registering, but you may miss out on exclusive content!
-
-## Contact Us
-
-- You are able to add your email and a brief message
-
-# Approach
-
-There was a variety of approaches because we were working on different aspects of the game. One of the first thing accomplished was a vision for the page and how things would link up.
+We used a variety approaches because we each worked on different aspects of the game. One of the first things accomplished was a vision for the page and how things would link up.
 
 ![mainPage](public/assets/mainpage.png)
 Main page Layout
 
 ![navBar](public/assets/navbar.png)
-clicking to make nav bar populate
+Clicking to make nav bar populate
 
 ![logReg](public/assets/loginmodal.png)
-Login and Register
+Register and login
 
 ![aboutUs](public/assets/AboutUs.png)
-About Us
+About us
 
-Then we continued with creating the routes as well as creating the game.
+Then we continued with creating the routes and the game.
 
 ![usersplaying](public/assets/users.png)
-Users Playing
+Users playing
 
-Wanted the game to be able to integrate with the accounts populated on the page, therefore if you log in you can see your name and avatar populated. But we allowed access to anyone who didn't register to play the game as well.
+We wanted the game to be able to integrate with the accounts populated on the page, so if you log in you can see your name and avatar populated. But we allowed access to anyone who didn't register to play the game as well.
 
 ![socket](public/assets/socketio.png)
 Socket.IO
 
-It was built using a realtime engine called SOCKET.IO which allowed us to implement certain features such as he live chat box, etc....
+It was built using a realtime engine called SOCKET.IO which allowed us to implement certain features such as live chat and multiplayer gaming.
+
+## Features
+
+### Registration
+Registration allows you to add a custom avatar as well as view all the other players. The game is still playable without registering, but you may miss out on exclusive content!
+
+### Contact Us
+You are able to add your email and a brief message.
 
 ### Create:
- - User Profile
- - Personalized (multiplayer)Game Using Template
- - Live chat during a game(if multiplayer)
+ - User
+ - Profile
+ - Live chat during a game (if multiplayer)
 
-### View:
- - All User Profiles
- - All Games
- - All Live Chat During a Game
+### Read:
+ - All user profiles
+ - All games
+ - All live chat during a game
 
 ### Update:
- - Edit User Profile Information
- - Edit Created Game Info
+ - Edit user profile information
  - Edit live chat
 
 ### Delete:
- - Your own profile
- - Your created games
- - Your created live chat
+ - Your own account
 
 ## Contributors
 #### Jaq Dunham https://github.com/goodbye-angel
@@ -83,7 +79,7 @@ It was built using a realtime engine called SOCKET.IO which allowed us to implem
 #### Hector Guevara https://github.com/hectorlito
 
 ### Future Goals
-- More Games
+- More games
 - More options for profile customization
-- Being able to view profiles specifically instead of a list View
-- client awareness depending on the screen size proportions and how that affects other gamers
+- Being able to view profiles when clicking on a player in the "all players" view
+- Client awareness depending on the screen size proportions and how that affects other gamers
