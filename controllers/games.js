@@ -24,6 +24,7 @@ router.post('/', async (req, res) => {
   try{
     const agame = await Game.create({
     color: "red",
+    _id: "5a3b3510dcd7051457168ca8",
     scores:{Player:{score:5,avatar:"https://cdn0.iconfinder.com/data/icons/avatars-6/500/Avatar_boy_man_people_account_player-512.png"}}
     });
     req.session.game = agame;
