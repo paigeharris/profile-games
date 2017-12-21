@@ -86,6 +86,7 @@ io.sockets.on('connection', function (socket) {
         socket.broadcast.emit('myClick', data);
         console.log("Clicked Game Button");
         console.log(data);
+      
     });
     socket.on('newChat', function (data) {
         socket.broadcast.emit('newChat', data);
