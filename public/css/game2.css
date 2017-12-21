@@ -1,0 +1,13 @@
+
+.game2container{
+  display: block;
+  margin: auto;
+}
+#game2{
+  overflow-x: visible;
+  overflow-y: visible;
+  overflow: visible;
+  display: block;
+  margin: 0 auto;
+  border: 20px solid black;
+}
