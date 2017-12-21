@@ -166,9 +166,14 @@ $(() => {
 
   $livechat.append($typed);
   $livechat.submit(() => {
-    allchats.push($typed.val())
+    allchats.unshift($typed.val()+" -"+username)
     $chat.empty();
+    let k = 0;
     for (chat of allchats) {
+      if (k>5) {
+        break;
+      }
+      k++;
       $chat.append($("<h2>"+chat+"</h2>").addClass("chath2"))
       $chat.append($("<hr>").addClass("chathr"));
     }
@@ -185,7 +190,7 @@ $(() => {
     overflow:"hidden"
   })
   $gamecontainer.append($startgame)
-  $gamecontainer.append($newbutton)
+  // $gamecontainer.append($newbutton)
   $game.append($gamebutton.hide());
   $gamecontainer.append($livechat);
   $gamecontainer.append($scoreboard);
