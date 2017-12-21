@@ -154,6 +154,12 @@ input {
 	bottom: 0;
 	right: 0;
 }
+
+.error{
+	text-align: center;
+	color: red;
+	font-size: 50px;
+}
 @media screen and (max-height: 450px) {
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
