@@ -5,7 +5,7 @@ app.controller("MainController", ["$http", function($http) {
   //begin MainController
   // ctrl variables
   this.hello = "Hello World";
-  this.showgame = true;
+  this.showgame = false;
   this.shownav = false;
   this.logreg = false;
   this.profile = false;
