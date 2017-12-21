@@ -6,7 +6,6 @@
   "dependencies": {
     "bcrypt": "^1.0.3",
     "compile": "0.0.2",
-    "csshake": "file:csshake",
     "express": "^4.16.2",
     "express-session": "^1.15.6",
     "http": "^0.0.0",
