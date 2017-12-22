@@ -18,6 +18,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+//create
 router.post('/', async (req, res) => {
   try{
     const user = await User.create(req.body);
@@ -29,6 +30,7 @@ router.post('/', async (req, res) => {
   }
 });
 
+//update
 router.put('/:id', async (req, res) => {
   try{
     const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {new: true,set:true});
@@ -39,6 +41,7 @@ router.put('/:id', async (req, res) => {
   }
 })
 
+//delete
 router.delete('/:id', async (req, res) => {
   try{
     const user = await

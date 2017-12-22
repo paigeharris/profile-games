@@ -25,7 +25,7 @@ router.delete('/logout', (req, res) => {
   });
 });
 
-
+// once you are signed in and hit join game you are your user. you cant click join game again to be a random user. you have to log out in order to do that.
 router.get('/', async (req, res) => {
   try{
     const user = await User.findOne({ username: req.session.user.username});
