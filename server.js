@@ -104,11 +104,12 @@ io.sockets.on('connection', function (socket) {
     });
     //end newuser
 
-    socket.on('newplayer',function(){
+    socket.on('newplayer',function(data){
         socket.player = {
             id: server.lastPlayerID++,
             x: randomInt(100,400),
-            y: randomInt(100,400)
+            y: randomInt(100,400),
+         info: data
 
         };
         console.log("NewPlayer: ",socket.player);

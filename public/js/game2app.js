@@ -14,12 +14,58 @@ Client.sendClick = function(x,y){
 };
 
 Client.socket.on('newplayer',function(data){
-    MMO.addNewPlayer(data.id,data.x,data.y);
+  console.log(data,"new player data");
+  let file = {
+    type: 'image',
+    key: data.info.username,
+    url: data.info.avatar,
+    data: null,
+    error: false,
+    loaded: false
+  };
+    console.log(file.url+ " file url");
+  file.data = new Image();
+  file.data.name = file.key;
+  file.data.onload = function () {
+    file.loaded = true;
+    game2.cache.addImage(file.key, file.url, file.data);
+    MMO.addNewPlayer(data.id,data.x,data.y,data.info);
+  };
+  file.data.onerror = function () {
+    file.error = true
+    console.log("hey",file.error);
+  };
+    // file.data.crossOrigin = '';
+    file.data.src = file.url;
+
 });
 
 Client.socket.on('allplayers',function(data){
     for(var i = 0; i < data.length; i++){
-        MMO.addNewPlayer(data[i].id,data[i].x,data[i].y);
+      console.log(data,"new player data");
+      let file2 = {
+        type: 'image',
+        key: data[i]["info"]["username"],
+        url: data[i]["info"]["avatar"],
+        data: null,
+        error: false,
+        loaded: false
+      };
+        console.log(file2.url+ " file2 url");
+      file2.data = new Image();
+      file2.data.name = file2.key;
+      file2.data.onload = function () {
+        file2.loaded = true;
+        game2.cache.addImage(file2.key, file2.url, file2.data);
+
+      };
+      file2.data.onerror = function () {
+        file2.error = true
+        console.log("hey",file2.error);
+      };
+        // file.data.crossOrigin = '';
+        file2.data.src = file2.url;
+        MMO.addNewPlayer(data[i].id,data[i].x,data[i].y,data[i].info);
     }
 
     Client.socket.on('move',function(data){
@@ -42,8 +88,6 @@ MMO.init = function(){
 };
 
 MMO.preload = function() {
-
-
 
 };
 
@@ -68,12 +112,15 @@ MMO.getCoordinates = function(pointer){
 
 };
 
-MMO.addNewPlayer = function(id,x,y){
+MMO.addNewPlayer = function(id,x,y,info){
 
-    MMO.playerMap[id] = MMO.add.sprite(x,y,"avatar");
+    // game2.cache.addImage(avatar, avatar);
+    MMO.playerMap[id] = MMO.add.sprite(x,y,info.username);
     console.log("Sprite Created!");
     MMO.playerMap[id].width=50;
     MMO.playerMap[id].height=50;
+
+
 };
 
 MMO.movePlayer = function(id,x,y){
@@ -116,30 +163,9 @@ xhttp.onreadystatechange = function() {
 };
 
 const commenceImage = () => {
-  let file = {
-    type: 'image',
-    key: 'avatar',
-    url: userg2.avatar,
-    data: null,
-    error: false,
-    loaded: false
-  };
-    console.log(file.url+ " file url");
-  file.data = new Image();
-  file.data.name = file.key;
-  file.data.onload = function () {
-    file.loaded = true;
-    game2.cache.addImage(file.key, file.url, file.data);
-    Client.askNewPlayer();
-  };
-  file.data.onerror = function () {
-    file.error = true
-    console.log("hey",file.error);
-  };
-    // file.data.crossOrigin = '';
-    file.data.src = file.url;
 
 
+Client.askNewPlayer();
 }
 //end xhttp
 
